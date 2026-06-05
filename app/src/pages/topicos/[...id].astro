@@ -1,0 +1,113 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import NormalDistributionChart from '../../components/NormalDistributionChart.astro';
+
+export async function getStaticPaths() {
+  const topicos = await getCollection('topicos');
+  return topicos.map(topico => ({
+    params: { id: topico.id },
+    props: { topico },
+  }));
+}
+
+const { topico } = Astro.props;
+const { Content } = await render(topico);
+---
+
+<Layout title={topico.data.titulo}>
+  <div class="topic-header">
+    <h1>{topico.data.titulo}</h1>
+    <div class="metadata">
+      <span class="tag">Unidade: {topico.data.ementa_ref}</span>
+      {topico.data.tags.map(tag => (
+        <span class="tag-outline">{tag}</span>
+      ))}
+    </div>
+  </div>
+
+  <div class="topic-content prose">
+    <div class="content">
+			<Content />
+			
+			{topico.id === '04-distribuicao-normal' && (
+				<div class="interactive-section">
+					<h2>Visualização Interativa: Distribuição Normal</h2>
+					<p>Experimente alterar a média ($\mu$) e o desvio padrão ($\sigma$) para ver como a curva em forma de sino é afetada. A média desloca a curva horizontalmente, enquanto o desvio padrão controla o achatamento (dispersão).</p>
+					<NormalDistributionChart />
+				</div>
+			)}
+		</div>
+  </div>
+
+  <div class="topic-actions">
+    <a href={`/exercicios?topico=${topico.id}`} class="btn">
+      Praticar este tópico
+    </a>
+  </div>
+</Layout>
+
+<style>
+  .interactive-section {
+		margin-top: var(--space-12);
+		padding-top: var(--space-8);
+		border-top: 1px dashed var(--color-border);
+	}
+	
+	.interactive-section h2 {
+		color: var(--color-primary);
+	}
+
+	.topic-container {
+    margin-bottom: var(--space-8);
+    padding-bottom: var(--space-6);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .topic-header {
+    margin-bottom: var(--space-8);
+    padding-bottom: var(--space-6);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .topic-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: var(--space-4);
+    color: var(--color-text);
+  }
+
+  .metadata {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .tag {
+    background-color: var(--color-primary);
+    color: white;
+    padding: var(--space-1) var(--space-3);
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+
+  .tag-outline {
+    background-color: transparent;
+    color: var(--color-text-muted);
+    border: 1px solid var(--color-border);
+    padding: var(--space-1) var(--space-3);
+    border-radius: 9999px;
+    font-size: 0.875rem;
+  }
+
+  .topic-content {
+    margin-bottom: var(--space-12);
+  }
+
+  .topic-actions {
+    display: flex;
+    justify-content: center;
+    padding-top: var(--space-8);
+    border-top: 1px dashed var(--color-border);
+  }
+</style>

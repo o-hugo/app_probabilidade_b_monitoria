@@ -1,0 +1,223 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const exercicios = await getCollection('exercicios');
+// We need to pass the exercicios metadata to the client side so it can render the ones due today.
+const exerciciosMap = exercicios.reduce((acc: any, ex: any) => {
+    acc[ex.id] = {
+        id: ex.id,
+        titulo: ex.data.titulo,
+        dificuldade: ex.data.dificuldade,
+        origem: ex.data.origem
+    };
+    return acc;
+}, {});
+---
+
+<Layout title="Revisão Diária">
+	<div class="page-header">
+		<h1>Revisão Espaçada (SM-2)</h1>
+		<p>Exercícios agendados para revisão hoje. A prática de recuperação é a chave para a memória de longo prazo.</p>
+	</div>
+
+	<div id="stats-panel" class="stats-panel">
+		<div class="stat-box">
+			<h3><span id="due-count">0</span></h3>
+			<p>Para revisar hoje</p>
+		</div>
+		<div class="stat-box">
+			<h3><span id="total-count">0</span></h3>
+			<p>Na sua memória</p>
+		</div>
+	</div>
+
+	<div class="exercises-grid" id="due-exercises-grid">
+		<!-- Rendered via JS -->
+	</div>
+    
+    <div id="no-due-msg" style="display: none;" class="empty-state">
+        <h2>🎉 Parabéns!</h2>
+        <p>Você não tem nenhuma revisão agendada para hoje. Volte amanhã ou pratique novos exercícios.</p>
+        <a href="/exercicios" class="btn btn-primary mt-4">Fazer Novos Exercícios</a>
+    </div>
+
+    <!-- Inject data into client-side -->
+    <script is:inline define:vars={{ exerciciosMap }}>
+        window.allExercises = exerciciosMap;
+    </script>
+</Layout>
+
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		const historyRaw = localStorage.getItem('sm2_history') || '{}';
+		const history = JSON.parse(historyRaw);
+		
+        const grid = document.getElementById('due-exercises-grid');
+        const dueCountEl = document.getElementById('due-count');
+        const totalCountEl = document.getElementById('total-count');
+        const noDueMsg = document.getElementById('no-due-msg');
+
+        if(!grid || !dueCountEl || !totalCountEl || !noDueMsg) return;
+
+        const now = new Date();
+        let dueCount = 0;
+        let totalCount = 0;
+
+        // @ts-ignore
+        const allExercises = window.allExercises || {};
+
+        grid.innerHTML = '';
+
+        for (const [id, data] of Object.entries(history)) {
+            totalCount++;
+            const nextReview = new Date((data as any).nextReview);
+            
+            if (nextReview <= now) {
+                dueCount++;
+                const exMeta = allExercises[id];
+                if (!exMeta) continue; // Exercise might have been deleted/renamed
+
+                const card = document.createElement('a');
+                card.href = `/exercicios/${id}`;
+                card.className = 'exercise-card';
+                card.innerHTML = `
+                    <div class="ex-header">
+                        <h3>${exMeta.titulo}</h3>
+                    </div>
+                    <div class="ex-tags">
+                        <span class="badge diff-${exMeta.dificuldade}">${exMeta.dificuldade}</span>
+                        <span class="badge origin">${exMeta.origem}</span>
+                        <span class="badge" style="background: var(--color-primary); color: white;">Atrasado</span>
+                    </div>
+                `;
+                grid.appendChild(card);
+            }
+        }
+
+        dueCountEl.textContent = dueCount.toString();
+        totalCountEl.textContent = totalCount.toString();
+
+        if (dueCount === 0 && totalCount > 0) {
+            noDueMsg.style.display = 'block';
+        } else if (totalCount === 0) {
+            noDueMsg.style.display = 'block';
+            noDueMsg.querySelector('p')!.textContent = "Você ainda não avaliou nenhum exercício. Comece a praticar!";
+        }
+	});
+</script>
+
+<style>
+	.page-header {
+		margin-bottom: var(--space-8);
+	}
+
+	.page-header h1 {
+		font-size: 2.5rem;
+		margin-bottom: var(--space-2);
+		color: var(--color-primary);
+	}
+
+	.page-header p {
+		font-size: 1.25rem;
+		color: var(--color-text-muted);
+	}
+
+    .stats-panel {
+        display: flex;
+        gap: var(--space-4);
+        margin-bottom: var(--space-8);
+    }
+
+    .stat-box {
+        background-color: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-lg);
+        padding: var(--space-6);
+        min-width: 200px;
+        text-align: center;
+        box-shadow: var(--shadow-sm);
+    }
+
+    .stat-box h3 {
+        font-size: 3rem;
+        margin: 0;
+        color: var(--color-primary);
+    }
+
+    .stat-box p {
+        margin: var(--space-2) 0 0 0;
+        color: var(--color-text-muted);
+        font-weight: 500;
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: var(--space-12) 0;
+        background-color: var(--color-surface);
+        border: 1px dashed var(--color-border);
+        border-radius: var(--radius-lg);
+    }
+
+    .empty-state h2 {
+        font-size: 2rem;
+        margin-bottom: var(--space-4);
+    }
+
+	.exercises-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+		gap: var(--space-4);
+	}
+
+	.exercise-card {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		background-color: var(--color-surface);
+		padding: var(--space-4);
+		border-radius: var(--radius-lg);
+		border: 1px solid var(--color-border);
+		text-decoration: none;
+		color: var(--color-text);
+		transition: all 0.2s;
+		min-height: 120px;
+	}
+
+	.exercise-card:hover {
+		transform: translateY(-2px);
+		border-color: var(--color-primary);
+		box-shadow: var(--shadow-sm);
+	}
+
+	.ex-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-start;
+		margin-bottom: var(--space-4);
+	}
+
+	.ex-header h3 {
+		margin: 0;
+		font-size: 1.125rem;
+		line-height: 1.4;
+	}
+
+	.ex-tags {
+		display: flex;
+		gap: var(--space-2);
+	}
+
+	.badge {
+		padding: var(--space-1) var(--space-3);
+		border-radius: var(--radius-md);
+		font-size: 0.875rem;
+		font-weight: 500;
+	}
+
+	.diff-baixa { background-color: #dcfce7; color: #166534; }
+	.diff-media { background-color: #fef08a; color: #854d0e; }
+	.diff-alta { background-color: #fee2e2; color: #991b1b; }
+	
+	.origin { background-color: var(--color-border); color: var(--color-text-muted); }
+</style>

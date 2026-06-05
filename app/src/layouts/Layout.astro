@@ -1,0 +1,111 @@
+---
+import '../styles/global.css';
+import 'katex/dist/katex.min.css';
+
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="pt-BR">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Ambiente de Aprendizagem Interativo para Probabilidade B" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title} | Probabilidade B</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+	</head>
+	<body>
+		<header class="app-header">
+			<div class="container">
+				<a href="/" class="logo">Probabilidade B</a>
+				<nav class="main-nav">
+					<a href="/topicos">Tópicos</a>
+					<a href="/exercicios">Exercícios</a>
+					<a href="/laboratorio">Laboratório</a>
+					<a href="/revisao-diaria">Revisão Diária</a>
+				</nav>
+			</div>
+		</header>
+		<main class="container main-content">
+			<slot />
+		</main>
+		<footer class="app-footer">
+			<div class="container">
+				<p>Desenvolvido para a disciplina IEE055 - UFAM</p>
+			</div>
+		</footer>
+	</body>
+</html>
+
+<style>
+	.app-header {
+		background-color: var(--color-surface);
+		border-bottom: 1px solid var(--color-border);
+		position: sticky;
+		top: 0;
+		z-index: 100;
+	}
+
+	.app-header .container {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		height: 4rem;
+	}
+
+	.logo {
+		font-weight: 700;
+		font-size: 1.25rem;
+		color: var(--color-text);
+	}
+
+	.logo:hover {
+		text-decoration: none;
+		color: var(--color-primary);
+	}
+
+	.main-nav {
+		display: flex;
+		gap: var(--space-6);
+	}
+
+	.main-nav a {
+		color: var(--color-text-muted);
+		font-weight: 500;
+	}
+
+	.main-nav a:hover,
+	.main-nav a[aria-current="page"] {
+		color: var(--color-primary);
+		text-decoration: none;
+	}
+
+	.container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 var(--space-4);
+	}
+
+	.main-content {
+		padding-top: var(--space-8);
+		padding-bottom: var(--space-12);
+		min-height: calc(100vh - 4rem - 4rem); /* Viewport - header - footer */
+	}
+
+	.app-footer {
+		background-color: var(--color-surface);
+		border-top: 1px solid var(--color-border);
+		padding: var(--space-6) 0;
+		text-align: center;
+		color: var(--color-text-muted);
+		font-size: 0.875rem;
+	}
+</style>

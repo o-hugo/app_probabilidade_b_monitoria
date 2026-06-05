@@ -1,0 +1,203 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+const exercicios = await getCollection('exercicios');
+---
+
+<Layout title="Exercícios">
+	<div class="page-header">
+		<h1>Prática de Exercícios</h1>
+		<p>Filtre e resolva exercícios com revelação progressiva.</p>
+	</div>
+
+	<div class="filters-container">
+		<div class="filter-group">
+			<label for="filter-diff">Dificuldade:</label>
+			<select id="filter-diff" class="filter-select">
+				<option value="all">Todas</option>
+				<option value="baixa">Baixa</option>
+				<option value="media">Média</option>
+				<option value="alta">Alta</option>
+			</select>
+		</div>
+		<div class="filter-group">
+			<label for="filter-origin">Origem:</label>
+			<select id="filter-origin" class="filter-select">
+				<option value="all">Todas</option>
+				<option value="lista-02">Lista 02</option>
+				<option value="prova-3">Prova 3</option>
+				<option value="slides">Slides</option>
+				<option value="livro">Livro</option>
+				<option value="aula">Aula</option>
+			</select>
+		</div>
+		<div class="filter-group">
+			<label for="filter-status">Status:</label>
+			<select id="filter-status" class="filter-select">
+				<option value="all">Todos</option>
+				<option value="unverified">Não Verificados (⚠️)</option>
+				<option value="verified">Verificados (✅)</option>
+			</select>
+		</div>
+	</div>
+
+	<div class="exercises-grid" id="exercises-grid">
+		{exercicios.map((ex) => (
+			<a href={`/exercicios/${ex.id}`} 
+			   class="exercise-card"
+			   data-diff={ex.data.dificuldade}
+			   data-origin={ex.data.origem}
+			   data-verified={ex.data.solucao_verificada ? "true" : "false"}>
+				<div class="ex-header">
+					<h3>{ex.data.titulo}</h3>
+					{!ex.data.solucao_verificada && <span class="warning-icon" title="Não verificada">⚠️</span>}
+				</div>
+				<div class="ex-tags">
+					<span class={`badge diff-${ex.data.dificuldade}`}>{ex.data.dificuldade}</span>
+					<span class="badge origin">{ex.data.origem}</span>
+				</div>
+			</a>
+		))}
+	</div>
+</Layout>
+
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		const diffFilter = document.getElementById('filter-diff') as HTMLSelectElement;
+		const originFilter = document.getElementById('filter-origin') as HTMLSelectElement;
+		const statusFilter = document.getElementById('filter-status') as HTMLSelectElement;
+		const cards = document.querySelectorAll('.exercise-card');
+
+		function filterCards() {
+			const diff = diffFilter.value;
+			const origin = originFilter.value;
+			const status = statusFilter.value;
+
+			cards.forEach((card: any) => {
+				const cDiff = card.dataset.diff;
+				const cOrigin = card.dataset.origin;
+				const cVerified = card.dataset.verified;
+
+				let show = true;
+				if (diff !== 'all' && cDiff !== diff) show = false;
+				if (origin !== 'all' && cOrigin !== origin) show = false;
+				if (status === 'unverified' && cVerified === 'true') show = false;
+				if (status === 'verified' && cVerified === 'false') show = false;
+
+				card.style.display = show ? 'flex' : 'none';
+			});
+		}
+
+		diffFilter.addEventListener('change', filterCards);
+		originFilter.addEventListener('change', filterCards);
+		statusFilter.addEventListener('change', filterCards);
+		
+		// Optional: Parse URL params to set initial filters
+		const urlParams = new URLSearchParams(window.location.search);
+		if(urlParams.has('topico')) {
+			// For now, topic filtering isn't implemented in the UI dropdowns,
+			// but we could extend the data attributes and filter logic to support it.
+		}
+	});
+</script>
+
+<style>
+	.page-header {
+		margin-bottom: var(--space-8);
+	}
+
+	.page-header h1 {
+		font-size: 2.5rem;
+		margin-bottom: var(--space-2);
+	}
+
+	.page-header p {
+		font-size: 1.25rem;
+		color: var(--color-text-muted);
+	}
+
+	.filters-container {
+		display: flex;
+		gap: var(--space-4);
+		margin-bottom: var(--space-8);
+		flex-wrap: wrap;
+		background-color: var(--color-surface);
+		padding: var(--space-4);
+		border-radius: var(--radius-md);
+		border: 1px solid var(--color-border);
+	}
+
+	.filter-group {
+		display: flex;
+		align-items: center;
+		gap: var(--space-2);
+	}
+
+	.filter-select {
+		padding: var(--space-2);
+		border-radius: var(--radius-md);
+		border: 1px solid var(--color-border);
+		background-color: var(--color-bg);
+	}
+
+	.exercises-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+		gap: var(--space-4);
+	}
+
+	.exercise-card {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		background-color: var(--color-surface);
+		padding: var(--space-4);
+		border-radius: var(--radius-lg);
+		border: 1px solid var(--color-border);
+		text-decoration: none;
+		color: var(--color-text);
+		transition: all 0.2s;
+		min-height: 120px;
+	}
+
+	.exercise-card:hover {
+		transform: translateY(-2px);
+		border-color: var(--color-primary);
+		box-shadow: var(--shadow-sm);
+	}
+
+	.ex-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-start;
+		margin-bottom: var(--space-4);
+	}
+
+	.ex-header h3 {
+		margin: 0;
+		font-size: 1.125rem;
+		line-height: 1.4;
+	}
+
+	.warning-icon {
+		font-size: 1.25rem;
+	}
+
+	.ex-tags {
+		display: flex;
+		gap: var(--space-2);
+	}
+
+	.badge {
+		padding: var(--space-1) var(--space-2);
+		border-radius: var(--radius-md);
+		font-size: 0.75rem;
+		font-weight: 500;
+	}
+
+	.diff-baixa { background-color: #dcfce7; color: #166534; }
+	.diff-media { background-color: #fef08a; color: #854d0e; }
+	.diff-alta { background-color: #fee2e2; color: #991b1b; }
+	.origin { background-color: var(--color-bg); color: var(--color-text-muted); border: 1px solid var(--color-border); }
+</style>

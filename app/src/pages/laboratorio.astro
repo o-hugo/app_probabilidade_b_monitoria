@@ -1,0 +1,337 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Laboratório de Distribuições">
+	<div class="page-header">
+		<h1>Laboratório Interativo de FDPs</h1>
+		<p>Explore como os parâmetros afetam o formato das principais distribuições contínuas na prática.</p>
+	</div>
+
+	<div class="lab-container">
+		<div class="controls-panel">
+			<div class="form-group">
+				<label for="dist-select">Distribuição:</label>
+				<select id="dist-select" class="form-control">
+					<option value="normal">Normal $N(\mu, \sigma^2)$</option>
+					<option value="uniforme">Uniforme $U(a, b)$</option>
+					<option value="exponencial">Exponencial $Exp(\lambda)$</option>
+				</select>
+			</div>
+
+			<!-- Normal Controls -->
+			<div id="controls-normal" class="param-controls active">
+				<div class="control-group">
+					<label>Média ($\mu$): <span id="val-mu" class="value-display">0</span></label>
+					<input id="slider-mu" type="range" min="-10" max="10" value="0" step="0.5">
+				</div>
+				<div class="control-group">
+					<label>Desvio Padrão ($\sigma$): <span id="val-sigma" class="value-display">1</span></label>
+					<input id="slider-sigma" type="range" min="0.5" max="5" value="1" step="0.1">
+				</div>
+				<p class="explanation">A **Média** desloca a curva horizontalmente. O **Desvio Padrão** controla o quão achatada (dispersa) ou pontiaguda (concentrada) a curva é.</p>
+			</div>
+
+			<!-- Uniform Controls -->
+			<div id="controls-uniforme" class="param-controls">
+				<div class="control-group">
+					<label>Mínimo ($a$): <span id="val-a" class="value-display">-5</span></label>
+					<input id="slider-a" type="range" min="-10" max="9" value="-5" step="1">
+				</div>
+				<div class="control-group">
+					<label>Máximo ($b$): <span id="val-b" class="value-display">5</span></label>
+					<input id="slider-b" type="range" min="-9" max="10" value="5" step="1">
+				</div>
+				<p class="explanation">A área total de um retângulo é base $\times$ altura $= 1$. Se a base $(b-a)$ aumenta, a altura (probabilidade) diminui para manter a área 1.</p>
+			</div>
+
+			<!-- Exponential Controls -->
+			<div id="controls-exponencial" class="param-controls">
+				<div class="control-group">
+					<label>Taxa ($\lambda$): <span id="val-lambda" class="value-display">1</span></label>
+					<input id="slider-lambda" type="range" min="0.1" max="3" value="1" step="0.1">
+				</div>
+				<p class="explanation">A **Taxa** ($\lambda$) indica a frequência de ocorrência do evento. Quanto maior a taxa, mais rápido a curva decai (eventos acontecem mais rápido).</p>
+			</div>
+		</div>
+
+		<div class="chart-panel">
+			<canvas id="labChart"></canvas>
+		</div>
+	</div>
+</Layout>
+
+<script>
+	import Chart from 'chart.js/auto';
+
+	document.addEventListener('DOMContentLoaded', () => {
+		const canvas = document.getElementById('labChart') as HTMLCanvasElement;
+		if (!canvas) return;
+
+		let chart: Chart;
+		const distSelect = document.getElementById('dist-select') as HTMLSelectElement;
+
+		// UI Elements
+		const controlsGroups = document.querySelectorAll('.param-controls');
+		
+		// Normal inputs
+		const sliderMu = document.getElementById('slider-mu') as HTMLInputElement;
+		const sliderSigma = document.getElementById('slider-sigma') as HTMLInputElement;
+		const valMu = document.getElementById('val-mu');
+		const valSigma = document.getElementById('val-sigma');
+
+		// Uniform inputs
+		const sliderA = document.getElementById('slider-a') as HTMLInputElement;
+		const sliderB = document.getElementById('slider-b') as HTMLInputElement;
+		const valA = document.getElementById('val-a');
+		const valB = document.getElementById('val-b');
+
+		// Exponential inputs
+		const sliderLambda = document.getElementById('slider-lambda') as HTMLInputElement;
+		const valLambda = document.getElementById('val-lambda');
+
+		// Math Functions
+		const pdfNormal = (x: number, mu: number, sigma: number) => {
+			return (1 / (sigma * Math.sqrt(2 * Math.PI))) * Math.exp(-0.5 * Math.pow((x - mu) / sigma, 2));
+		};
+
+		const pdfUniform = (x: number, a: number, b: number) => {
+			if (x >= a && x <= b) return 1 / (b - a);
+			return 0;
+		};
+
+		const pdfExponential = (x: number, lambda: number) => {
+			if (x >= 0) return lambda * Math.exp(-lambda * x);
+			return 0;
+		};
+
+		function updateChart() {
+			const type = distSelect.value;
+			let labels = [];
+			let data = [];
+			let labelText = '';
+			let maxY = 1;
+			
+			// Show correct controls
+			controlsGroups.forEach(el => el.classList.remove('active'));
+			document.getElementById(`controls-${type}`)?.classList.add('active');
+
+			if (type === 'normal') {
+				const mu = parseFloat(sliderMu.value);
+				const sigma = parseFloat(sliderSigma.value);
+				if(valMu) valMu.textContent = mu.toFixed(1);
+				if(valSigma) valSigma.textContent = sigma.toFixed(1);
+				labelText = `Normal(μ=${mu.toFixed(1)}, σ=${sigma.toFixed(1)})`;
+				maxY = 0.8;
+
+				for (let x = -15; x <= 15; x += 0.2) {
+					labels.push(x.toFixed(1));
+					data.push(pdfNormal(x, mu, sigma));
+				}
+			} else if (type === 'uniforme') {
+				let a = parseFloat(sliderA.value);
+				let b = parseFloat(sliderB.value);
+				
+				// Ensure a < b
+				if (a >= b) {
+					a = b - 1;
+					sliderA.value = a.toString();
+				}
+				
+				if(valA) valA.textContent = a.toString();
+				if(valB) valB.textContent = b.toString();
+				labelText = `Uniforme(${a}, ${b})`;
+				maxY = 1;
+
+				for (let x = -15; x <= 15; x += 0.2) {
+					labels.push(x.toFixed(1));
+					// Chart.js line charts don't do steps well by default without duplicate points,
+					// but dense points make it look okay.
+					data.push(pdfUniform(x, a, b));
+				}
+			} else if (type === 'exponencial') {
+				const lambda = parseFloat(sliderLambda.value);
+				if(valLambda) valLambda.textContent = lambda.toFixed(1);
+				labelText = `Exponencial(λ=${lambda.toFixed(1)})`;
+				maxY = 3; // lambda can go up to 3
+
+				for (let x = -2; x <= 10; x += 0.1) {
+					labels.push(x.toFixed(1));
+					data.push(pdfExponential(x, lambda));
+				}
+			}
+
+			if (chart) {
+				chart.data.labels = labels;
+				chart.data.datasets[0].data = data;
+				chart.data.datasets[0].label = labelText;
+				
+				// Update Y scale max dynamically based on distribution
+				if (chart.options.scales && chart.options.scales.y) {
+					chart.options.scales.y.max = maxY;
+				}
+				
+				// For uniform distribution, use stepped line
+				chart.data.datasets[0].stepped = type === 'uniforme' ? 'middle' : false;
+
+				chart.update();
+			} else {
+				const ctx = canvas.getContext('2d');
+				if(!ctx) return;
+				
+				chart = new Chart(ctx, {
+					type: 'line',
+					data: {
+						labels: labels,
+						datasets: [{
+							label: labelText,
+							data: data,
+							borderColor: 'rgb(37, 99, 235)',
+							backgroundColor: 'rgba(37, 99, 235, 0.2)',
+							borderWidth: 2,
+							pointRadius: 0,
+							fill: true,
+							tension: type === 'uniforme' ? 0 : 0.4,
+							stepped: type === 'uniforme' ? 'middle' : false
+						}]
+					},
+					options: {
+						responsive: true,
+						maintainAspectRatio: false,
+						scales: {
+							y: { 
+								beginAtZero: true, 
+								title: { display: true, text: 'Densidade f(x)' },
+								max: maxY
+							},
+							x: { 
+								title: { display: true, text: 'Valores de x' },
+								ticks: { maxTicksLimit: 15 }
+							}
+						},
+						animation: { duration: 0 } // disable animation for smooth slider tracking
+					}
+				});
+			}
+		}
+
+		// Event Listeners
+		distSelect.addEventListener('change', updateChart);
+		
+		// Setup all slider listeners
+		[sliderMu, sliderSigma, sliderA, sliderB, sliderLambda].forEach(slider => {
+			if(slider) slider.addEventListener('input', updateChart);
+		});
+
+		// Initial render
+		updateChart();
+	});
+</script>
+
+<style>
+	.page-header {
+		margin-bottom: var(--space-8);
+	}
+
+	.page-header h1 {
+		font-size: 2.5rem;
+		margin-bottom: var(--space-2);
+		color: var(--color-primary);
+	}
+
+	.page-header p {
+		font-size: 1.25rem;
+		color: var(--color-text-muted);
+	}
+
+	.lab-container {
+		display: grid;
+		grid-template-columns: 300px 1fr;
+		gap: var(--space-6);
+		align-items: start;
+	}
+
+	@media (max-width: 900px) {
+		.lab-container {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	.controls-panel {
+		background-color: var(--color-surface);
+		padding: var(--space-6);
+		border-radius: var(--radius-lg);
+		border: 1px solid var(--color-border);
+		box-shadow: var(--shadow-sm);
+	}
+
+	.form-group {
+		margin-bottom: var(--space-6);
+		padding-bottom: var(--space-6);
+		border-bottom: 1px dashed var(--color-border);
+	}
+
+	.form-group label {
+		display: block;
+		font-weight: 700;
+		margin-bottom: var(--space-2);
+	}
+
+	.form-control {
+		width: 100%;
+		padding: var(--space-2);
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-md);
+		background-color: var(--color-bg);
+		font-size: 1rem;
+	}
+
+	.param-controls {
+		display: none;
+	}
+
+	.param-controls.active {
+		display: block;
+	}
+
+	.control-group {
+		margin-bottom: var(--space-4);
+	}
+
+	.control-group label {
+		display: flex;
+		justify-content: space-between;
+		font-weight: 500;
+		margin-bottom: var(--space-2);
+	}
+
+	.value-display {
+		font-family: var(--font-mono);
+		color: var(--color-primary);
+		font-weight: 700;
+	}
+
+	input[type="range"] {
+		width: 100%;
+		cursor: pointer;
+	}
+
+	.explanation {
+		margin-top: var(--space-6);
+		font-size: 0.875rem;
+		color: var(--color-text-muted);
+		background-color: var(--color-bg);
+		padding: var(--space-3);
+		border-radius: var(--radius-md);
+		border-left: 4px solid var(--color-primary);
+	}
+
+	.chart-panel {
+		background-color: var(--color-surface);
+		padding: var(--space-6);
+		border-radius: var(--radius-lg);
+		border: 1px solid var(--color-border);
+		box-shadow: var(--shadow-sm);
+		height: 500px;
+	}
+</style>

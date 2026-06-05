@@ -1,0 +1,416 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const exercicios = await getCollection('exercicios');
+  return exercicios.map(ex => ({
+    params: { id: ex.id },
+    props: { ex },
+  }));
+}
+
+const { ex } = Astro.props;
+const { Content } = await render(ex);
+---
+
+<Layout title={ex.data.titulo}>
+  <div class="exercise-header">
+    <div class="header-content">
+      <h1>{ex.data.titulo}</h1>
+      <div class="metadata">
+        <span class={`badge diff-${ex.data.dificuldade}`}>Dificuldade: {ex.data.dificuldade}</span>
+        <span class="badge origin">Origem: {ex.data.origem}</span>
+        {!ex.data.solucao_verificada && (
+          <span class="badge unverified" title="Esta solução ainda não foi verificada.">⚠️ Não verificada</span>
+        )}
+      </div>
+    </div>
+  </div>
+
+  <div class="exercise-container">
+    {ex.data.resposta_final && (
+      <div id="validation-panel" class="validation-panel" style="display: none;">
+        <h3>Valide sua resposta</h3>
+        <div class="input-group">
+          <input type="text" id="answer-input" placeholder="Digite sua resposta final (ex: 0.25)" />
+          <button id="check-answer-btn" class="btn btn-primary">Verificar</button>
+        </div>
+        <p id="validation-feedback" class="mt-2 font-medium"></p>
+        <input type="hidden" id="correct-answer" value={ex.data.resposta_final} />
+      </div>
+    )}
+
+    <div id="exercise-content" class="prose">
+      <Content />
+    </div>
+    
+    <div id="evaluation-panel" class="evaluation-panel" hidden>
+      <h3>Como você se saiu?</h3>
+      <p>Avalie seu desempenho antes de ver a solução completa para melhorar sua retenção (Prática de Recuperação).</p>
+      <div class="eval-buttons">
+        <button class="btn eval-btn" data-score="correct">✅ Acertei</button>
+        <button class="btn eval-btn" data-score="partial">🟨 Parcial</button>
+        <button class="btn eval-btn" data-score="wrong">❌ Errei / Não sabia</button>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  // Progressive Disclosure Logic
+  document.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById('exercise-content');
+    if (!container) return;
+
+    // We want to transform the DOM to create progressive disclosure.
+    // The markdown structure is typically:
+    // ## Enunciado
+    // (content)
+    // ## Passo 1...
+    // (content)
+    // ## Passo 2...
+    // (content)
+    
+    const children = Array.from(container.children);
+    let currentSection = null;
+    let sections = [];
+    
+    // Group elements by their preceding H2
+    children.forEach(el => {
+      if (el.tagName === 'H2') {
+        currentSection = { heading: el, content: [] };
+        sections.push(currentSection);
+      } else if (currentSection) {
+        currentSection.content.push(el);
+      }
+    });
+
+    container.innerHTML = ''; // Clear container
+    
+    let hasSteps = false;
+
+    sections.forEach((section, index) => {
+      const headingText = section.heading.textContent?.trim().toLowerCase() || '';
+      
+      if (headingText === 'enunciado') {
+        // Enunciado is always visible
+        const div = document.createElement('div');
+        div.className = 'enunciado-section';
+        div.appendChild(section.heading);
+        section.content.forEach(el => div.appendChild(el));
+        container.appendChild(div);
+        
+        // "Tente resolver" button acts as the start of the progressive disclosure
+        const tryBtn = document.createElement('button');
+        tryBtn.className = 'btn try-btn';
+        tryBtn.textContent = 'Começar a ver a solução (Passo 1)';
+        tryBtn.onclick = () => {
+          tryBtn.style.display = 'none';
+          
+          const valPanel = document.getElementById('validation-panel');
+          if (valPanel) {
+            valPanel.style.display = 'block';
+          }
+          
+          // Find all details and show the first one
+          const allDetails = container.querySelectorAll('.step-details');
+          if(allDetails.length > 0) {
+            (allDetails[0] as HTMLElement).style.display = 'block';
+            (allDetails[0] as HTMLDetailsElement).open = true;
+          } else {
+            // No steps, just show evaluation
+            const evalPanel = document.getElementById('evaluation-panel');
+            if(evalPanel) evalPanel.hidden = false;
+          }
+        };
+        container.appendChild(tryBtn);
+      } 
+      else if (headingText.startsWith('passo') || headingText.startsWith('solução') || headingText.startsWith('solucao')) {
+        hasSteps = true;
+        // Steps are hidden in <details> initially, and the details themselves are hidden until user clicks "Tente resolver"
+        const details = document.createElement('details');
+        details.className = 'step-details';
+        details.style.display = 'none'; // Hidden initially
+        
+        const summary = document.createElement('summary');
+        summary.className = 'step-summary';
+        // Put heading text in summary
+        summary.textContent = section.heading.textContent;
+        details.appendChild(summary);
+        
+        const contentDiv = document.createElement('div');
+        contentDiv.className = 'step-content';
+        section.content.forEach(el => contentDiv.appendChild(el));
+        
+        // Add a "Next step" button if this is not the last step
+        const isLastStep = index === sections.length - 1;
+        if (!isLastStep) {
+          const nextBtn = document.createElement('button');
+          nextBtn.className = 'btn btn-secondary mt-4 mb-2';
+          nextBtn.textContent = 'Revelar próximo passo';
+          nextBtn.onclick = () => {
+            nextBtn.style.display = 'none';
+            const nextDetails = details.nextElementSibling as HTMLElement;
+            if (nextDetails && nextDetails.classList.contains('step-details')) {
+              nextDetails.style.display = 'block';
+              (nextDetails as HTMLDetailsElement).open = true;
+            }
+          };
+          contentDiv.appendChild(nextBtn);
+        } else {
+          // If it's the last step, clicking it or reaching it shows the evaluation panel
+          const endBtn = document.createElement('button');
+          endBtn.className = 'btn btn-secondary mt-4 mb-2';
+          endBtn.textContent = 'Finalizar e Avaliar';
+          endBtn.onclick = () => {
+            endBtn.style.display = 'none';
+            const evalPanel = document.getElementById('evaluation-panel');
+            if(evalPanel) evalPanel.hidden = false;
+          };
+          contentDiv.appendChild(endBtn);
+        }
+
+        details.appendChild(contentDiv);
+        container.appendChild(details);
+      } else {
+        // Other sections just append normally
+        container.appendChild(section.heading);
+        section.content.forEach(el => container.appendChild(el));
+      }
+    });
+
+    // If no steps were found, maybe the structure is different, just show everything
+    if (!hasSteps) {
+      const tryBtn = container.querySelector('.try-btn') as HTMLElement;
+      if (tryBtn) tryBtn.style.display = 'none';
+      const evalPanel = document.getElementById('evaluation-panel');
+      if(evalPanel) evalPanel.hidden = false;
+    }
+
+    // SM-2 Spaced Repetition Logic (LocalStorage)
+    const evalButtons = document.querySelectorAll('.eval-btn');
+    evalButtons.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const target = e.target as HTMLButtonElement;
+        const scoreStr = target.dataset.score;
+        let quality = 0;
+        if (scoreStr === 'correct') quality = 5;
+        if (scoreStr === 'partial') quality = 3;
+        if (scoreStr === 'wrong') quality = 1;
+
+        // Load existing history
+        const exerciseId = window.location.pathname.split('/').filter(Boolean).pop();
+        if (!exerciseId) return;
+
+        const historyRaw = localStorage.getItem('sm2_history') || '{}';
+        const history = JSON.parse(historyRaw);
+        
+        const item = history[exerciseId] || {
+          repetitions: 0,
+          interval: 1,
+          easeFactor: 2.5,
+          nextReview: new Date().toISOString()
+        };
+
+        // SM-2 Algorithm
+        if (quality >= 3) {
+          if (item.repetitions === 0) item.interval = 1;
+          else if (item.repetitions === 1) item.interval = 6;
+          else item.interval = Math.round(item.interval * item.easeFactor);
+          item.repetitions += 1;
+        } else {
+          item.repetitions = 0;
+          item.interval = 1;
+        }
+
+        item.easeFactor = item.easeFactor + (0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02));
+        if (item.easeFactor < 1.3) item.easeFactor = 1.3;
+
+        // Calculate next review date
+        const nextDate = new Date();
+        nextDate.setDate(nextDate.getDate() + item.interval);
+        item.nextReview = nextDate.toISOString();
+
+        history[exerciseId] = item;
+        localStorage.setItem('sm2_history', JSON.stringify(history));
+
+        target.textContent = `Registrado! Próxima revisão: em ${item.interval} dia(s)`;
+        
+        evalButtons.forEach(b => (b as HTMLElement).style.opacity = '0.5');
+        target.style.opacity = '1';
+        target.style.pointerEvents = 'none';
+      });
+    });
+
+    // Answer Validation Logic
+    const checkBtn = document.getElementById('check-answer-btn');
+    if (checkBtn) {
+      checkBtn.addEventListener('click', () => {
+        const input = document.getElementById('answer-input') as HTMLInputElement;
+        const correctInput = document.getElementById('correct-answer') as HTMLInputElement;
+        const feedback = document.getElementById('validation-feedback');
+        if(!input || !correctInput || !feedback) return;
+
+        const userVal = input.value.trim().replace(',', '.');
+        const correctVal = correctInput.value.trim().replace(',', '.');
+        
+        // Simple numeric comparison (handle small floating point differences)
+        const userNum = parseFloat(userVal);
+        const correctNum = parseFloat(correctVal);
+
+        if (!isNaN(userNum) && !isNaN(correctNum) && Math.abs(userNum - correctNum) < 0.01) {
+          feedback.textContent = '✅ Resposta Correta!';
+          feedback.style.color = '#166534';
+          input.style.borderColor = '#166534';
+          
+          // Reveal all steps
+          document.querySelectorAll('.step-details').forEach(el => {
+            (el as HTMLElement).style.display = 'block';
+            (el as HTMLDetailsElement).open = true;
+          });
+          const evalPanel = document.getElementById('evaluation-panel');
+          if(evalPanel) evalPanel.hidden = false;
+
+        } else if (userVal === correctVal) {
+          feedback.textContent = '✅ Resposta Correta!';
+          feedback.style.color = '#166534';
+        } else {
+          feedback.textContent = '❌ Resposta Incorreta. Tente revisar seus cálculos ou reveja o próximo passo da solução.';
+          feedback.style.color = '#991b1b';
+          input.style.borderColor = '#991b1b';
+        }
+      });
+    }
+  });
+</script>
+
+<style>
+  .exercise-header {
+    margin-bottom: var(--space-8);
+    padding-bottom: var(--space-6);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .exercise-header h1 {
+    font-size: 2rem;
+    margin-bottom: var(--space-4);
+  }
+
+  .metadata {
+    display: flex;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+  }
+
+  .badge {
+    padding: var(--space-1) var(--space-3);
+    border-radius: var(--radius-md);
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+
+  .diff-baixa { background-color: #dcfce7; color: #166534; }
+  .diff-media { background-color: #fef08a; color: #854d0e; }
+  .diff-alta { background-color: #fee2e2; color: #991b1b; }
+  
+  .origin { background-color: var(--color-border); color: var(--color-text-muted); }
+  .unverified { background-color: #ffedd5; color: #c2410c; border: 1px solid #fdba74; }
+
+  .exercise-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .evaluation-panel {
+    margin-top: var(--space-8);
+    padding: var(--space-6);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .eval-buttons {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-4);
+    margin-top: var(--space-4);
+  }
+
+  .validation-panel {
+    margin-bottom: var(--space-6);
+    padding: var(--space-6);
+    background-color: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-radius: var(--radius-lg);
+  }
+
+  .validation-panel h3 {
+    margin-top: 0;
+    margin-bottom: var(--space-4);
+    color: var(--color-primary);
+  }
+
+  .input-group {
+    display: flex;
+    gap: var(--space-2);
+  }
+
+  .input-group input {
+    flex: 1;
+    padding: var(--space-2) var(--space-4);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+  }
+
+  :global(.enunciado-section) {
+    background-color: var(--color-surface);
+    padding: var(--space-6);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: var(--space-6);
+    border-left: 4px solid var(--color-primary);
+  }
+
+  :global(.enunciado-section h2) {
+    margin-top: 0;
+    font-size: 1.25rem;
+    color: var(--color-primary);
+  }
+
+  :global(.try-btn) {
+    display: block;
+    width: 100%;
+    margin: var(--space-6) 0;
+    padding: var(--space-4);
+    font-size: 1.125rem;
+  }
+
+  :global(.step-details) {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-4);
+    overflow: hidden;
+  }
+
+  :global(.step-summary) {
+    padding: var(--space-4);
+    background-color: var(--color-bg);
+    font-weight: 600;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  :global(.step-summary:hover) {
+    background-color: #f1f5f9;
+  }
+
+  :global(.step-content) {
+    padding: var(--space-4);
+    border-top: 1px solid var(--color-border);
+  }
+</style>
