@@ -39,7 +39,7 @@ const exerciciosMap = exercicios.reduce((acc: any, ex: any) => {
     <div id="no-due-msg" style="display: none;" class="empty-state">
         <h2>🎉 Parabéns!</h2>
         <p>Você não tem nenhuma revisão agendada para hoje. Volte amanhã ou pratique novos exercícios.</p>
-        <a href="/exercicios" class="btn btn-primary mt-4">Fazer Novos Exercícios</a>
+        <a href={`${import.meta.env.BASE_URL}exercicios`} class="btn btn-primary mt-4">Fazer Novos Exercícios</a>
     </div>
 
     <!-- Inject data into client-side -->
