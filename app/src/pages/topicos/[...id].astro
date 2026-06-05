@@ -41,7 +41,7 @@ const { Content } = await render(topico);
   </div>
 
   <div class="topic-actions">
-    <a href={`/exercicios?topico=${topico.id}`} class="btn">
+    <a href={`${import.meta.env.BASE_URL}exercicios?topico=${topico.id}`} class="btn">
       Praticar este tópico
     </a>
   </div>

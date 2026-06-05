@@ -44,7 +44,7 @@ const exercicios = await getCollection('exercicios');
 
 	<div class="exercises-grid" id="exercises-grid">
 		{exercicios.map((ex) => (
-			<a href={`/exercicios/${ex.id}`} 
+			<a href={`${import.meta.env.BASE_URL}exercicios/${ex.id}`} 
 			   class="exercise-card"
 			   data-diff={ex.data.dificuldade}
 			   data-origin={ex.data.origem}
