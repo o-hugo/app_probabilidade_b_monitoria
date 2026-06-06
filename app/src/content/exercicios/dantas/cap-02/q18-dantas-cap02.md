@@ -1,9 +1,9 @@
 ---
 id: "q18-dantas-cap02"
 titulo: "Questão 18"
-topicos: []
+topicos: ["03-modelos-continuos","02-funcao-geradora-momentos"]
 dificuldade: "media"
-origem: "livro-dantas"
+origem: "livro"
 solucao_verificada: false
 ---
 

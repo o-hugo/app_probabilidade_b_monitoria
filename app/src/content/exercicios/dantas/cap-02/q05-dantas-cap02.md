@@ -1,9 +1,9 @@
 ---
 id: "q05-dantas-cap02"
 titulo: "Questão 5"
-topicos: []
+topicos: ["03-modelos-continuos"]
 dificuldade: "media"
-origem: "livro-dantas"
+origem: "livro"
 solucao_verificada: false
 ---
 

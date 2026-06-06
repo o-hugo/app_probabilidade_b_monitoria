@@ -1,9 +1,9 @@
 ---
 id: "q35-dantas-cap01"
 titulo: "Questão 35"
-topicos: []
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
-origem: "livro-dantas"
+origem: "livro"
 solucao_verificada: false
 ---
 

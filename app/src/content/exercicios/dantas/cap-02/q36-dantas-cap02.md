@@ -1,9 +1,9 @@
 ---
 id: "q36-dantas-cap02"
 titulo: "Questão 36"
-topicos: []
+topicos: ["03-modelos-continuos","05-funcao-de-variavel-aleatoria"]
 dificuldade: "dificil"
-origem: "livro-dantas"
+origem: "livro"
 solucao_verificada: false
 ---
 

@@ -1,9 +1,9 @@
 ---
 id: "q27-dantas-cap02"
 titulo: "Questão 27"
-topicos: []
+topicos: ["03-modelos-continuos"]
 dificuldade: "dificil"
-origem: "livro-dantas"
+origem: "livro"
 solucao_verificada: false
 ---
 

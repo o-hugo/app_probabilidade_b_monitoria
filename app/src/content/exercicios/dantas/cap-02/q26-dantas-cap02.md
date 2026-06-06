@@ -1,9 +1,9 @@
 ---
 id: "q26-dantas-cap02"
 titulo: "Questão 26"
-topicos: []
+topicos: ["03-modelos-continuos"]
 dificuldade: "media"
-origem: "livro-dantas"
+origem: "livro"
 solucao_verificada: false
 ---
 

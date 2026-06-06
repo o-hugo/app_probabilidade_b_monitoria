@@ -48,7 +48,8 @@ const exercicios = await getCollection('exercicios');
 			   class="exercise-card"
 			   data-diff={ex.data.dificuldade}
 			   data-origin={ex.data.origem}
-			   data-verified={ex.data.solucao_verificada ? "true" : "false"}>
+			   data-verified={ex.data.solucao_verificada ? "true" : "false"}
+			   data-topicos={JSON.stringify(ex.data.topicos)}>
 				<div class="ex-header">
 					<h3>{ex.data.titulo}</h3>
 					{!ex.data.solucao_verificada && <span class="warning-icon" title="Não verificada">⚠️</span>}
@@ -69,6 +70,9 @@ const exercicios = await getCollection('exercicios');
 		const statusFilter = document.getElementById('filter-status') as HTMLSelectElement;
 		const cards = document.querySelectorAll('.exercise-card');
 
+		const urlParams = new URLSearchParams(window.location.search);
+		const topicoParam = urlParams.get('topico');
+
 		function filterCards() {
 			const diff = diffFilter.value;
 			const origin = originFilter.value;
@@ -78,12 +82,17 @@ const exercicios = await getCollection('exercicios');
 				const cDiff = card.dataset.diff;
 				const cOrigin = card.dataset.origin;
 				const cVerified = card.dataset.verified;
+				const cTopicos = card.dataset.topicos || "[]";
+				
+				let topicosArray = [];
+				try { topicosArray = JSON.parse(cTopicos); } catch(e) {}
 
 				let show = true;
 				if (diff !== 'all' && cDiff !== diff) show = false;
 				if (origin !== 'all' && cOrigin !== origin) show = false;
 				if (status === 'unverified' && cVerified === 'true') show = false;
 				if (status === 'verified' && cVerified === 'false') show = false;
+				if (topicoParam && !topicosArray.includes(topicoParam)) show = false;
 
 				card.style.display = show ? 'flex' : 'none';
 			});
@@ -93,11 +102,9 @@ const exercicios = await getCollection('exercicios');
 		originFilter.addEventListener('change', filterCards);
 		statusFilter.addEventListener('change', filterCards);
 		
-		// Optional: Parse URL params to set initial filters
-		const urlParams = new URLSearchParams(window.location.search);
-		if(urlParams.has('topico')) {
-			// For now, topic filtering isn't implemented in the UI dropdowns,
-			// but we could extend the data attributes and filter logic to support it.
+		// Inicializa o filtro imediatamente caso haja parâmetros
+		if(topicoParam) {
+			filterCards();
 		}
 	});
 </script>

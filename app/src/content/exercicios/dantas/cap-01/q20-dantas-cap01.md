@@ -1,9 +1,9 @@
 ---
 id: "q20-dantas-cap01"
 titulo: "Questão 20"
-topicos: []
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
-origem: "livro-dantas"
+origem: "livro"
 solucao_verificada: false
 ---
 

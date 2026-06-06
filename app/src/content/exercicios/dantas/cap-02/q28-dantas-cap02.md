@@ -1,9 +1,9 @@
 ---
 id: "q28-dantas-cap02"
 titulo: "Questão 28"
-topicos: []
+topicos: ["04-distribuicao-normal"]
 dificuldade: "media"
-origem: "livro-dantas"
+origem: "livro"
 solucao_verificada: false
 ---
 

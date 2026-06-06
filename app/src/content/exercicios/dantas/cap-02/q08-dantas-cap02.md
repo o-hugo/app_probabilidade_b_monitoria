@@ -1,9 +1,9 @@
 ---
 id: "q08-dantas-cap02"
 titulo: "Questão 8"
-topicos: []
+topicos: ["03-modelos-continuos"]
 dificuldade: "media"
-origem: "livro-dantas"
+origem: "livro"
 solucao_verificada: false
 ---
 

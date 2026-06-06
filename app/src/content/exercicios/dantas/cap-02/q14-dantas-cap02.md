@@ -1,9 +1,9 @@
 ---
 id: "q14-dantas-cap02"
 titulo: "Questão 14"
-topicos: []
+topicos: ["04-distribuicao-normal"]
 dificuldade: "media"
-origem: "livro-dantas"
+origem: "livro"
 solucao_verificada: false
 ---
 
