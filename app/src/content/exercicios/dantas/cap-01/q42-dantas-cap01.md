@@ -1,7 +1,7 @@
 ---
 id: "q42-dantas-cap01"
 titulo: "Questão 42"
-topicos: ["variaveis-aleatorias-continuas"]
+topicos: ["01-variaveis-aleatorias-continuas"]
 dificuldade: "alta"
 origem: "livro"
 solucao_verificada: false

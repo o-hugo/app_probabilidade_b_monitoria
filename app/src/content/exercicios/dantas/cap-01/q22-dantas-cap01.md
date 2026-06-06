@@ -1,7 +1,7 @@
 ---
 id: "q22-dantas-cap01"
 titulo: "Questão 22"
-topicos: ["variaveis-aleatorias-continuas"]
+topicos: ["01-variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false

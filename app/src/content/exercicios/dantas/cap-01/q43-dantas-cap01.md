@@ -1,7 +1,7 @@
 ---
 id: "q43-dantas-cap01"
 titulo: "Questão 43"
-topicos: ["variaveis-aleatorias-continuas"]
+topicos: ["01-variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false

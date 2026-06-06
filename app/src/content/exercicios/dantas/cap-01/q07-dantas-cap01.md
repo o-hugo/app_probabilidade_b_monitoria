@@ -1,7 +1,7 @@
 ---
 id: "q07-dantas-cap01"
 titulo: "Questão 7"
-topicos: ["variaveis-aleatorias-continuas"]
+topicos: ["01-variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false

@@ -141,6 +141,12 @@ Texto do enunciado.
 Conteudo do passo.
 ```
 
+> ⚠️ **ALERTA CRÍTICO PARA IAs**: 
+> Os campos `dificuldade` e `origem` possuem **validação estrita por Enum** via Zod. 
+> Se você inventar valores (ex: `dificuldade: "facil"` ou `origem: "livro-dantas"`), **o build do GitHub Actions VAI FALHAR com exit code 1**.
+> Consulte SEMPRE `app/src/content.config.ts` para os valores permitidos.
+> Para entender a complexidade e boas práticas na extração de novas questões, LEIA OBRIGATORIAMENTE: `spec_kit/guia-adicao-questoes-llm.md`.
+
 **Regra de verificacao:** `solucao_verificada: false` exibe aviso para o aluno.
 Nunca mude para `true` sem conferir cada passo matematicamente.
 
@@ -153,6 +159,9 @@ Definidos em `app/src/content.config.ts`. Os campos obrigatorios sao:
 **Topicos:** `id`, `titulo`, `ordem`, `ementa_ref`, `tags`
 
 **Exercicios:** `id`, `titulo`, `topicos`, `dificuldade`, `origem`, `solucao_verificada`
+- *Valores restritos atuais (Consulte o arquivo para a lista final)*: 
+  - `dificuldade`: SÓ ACEITA `'baixa' | 'media' | 'alta'`
+  - `origem`: SÓ ACEITA `'lista' | 'lista-02' | 'prova-3' | 'slide' | 'slides' | 'livro' | 'aula'`
 
 **Revisao:** `id`, `titulo`, `topicos`
 
