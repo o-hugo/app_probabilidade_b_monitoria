@@ -13,95 +13,50 @@ import Layout from '../layouts/Layout.astro';
 			<div class="form-group">
 				<label for="dist-select">Distribuição:</label>
 				<select id="dist-select" class="form-control">
-					<option value="normal">Normal N(μ, σ²)</option>
-					<option value="uniforme">Uniforme U(a, b)</option>
-					<option value="exponencial">Exponencial Exp(λ)</option>
+					<option value="normal">Normal $N(\mu, \sigma^2)$</option>
+					<option value="uniforme">Uniforme $U(a, b)$</option>
+					<option value="exponencial">Exponencial $Exp(\lambda)$</option>
 				</select>
 			</div>
 
 			<!-- Normal Controls -->
 			<div id="controls-normal" class="param-controls active">
 				<div class="control-group">
-					<label>Média (μ): <span id="val-mu" class="value-display">0</span></label>
+					<label>Média ($\mu$): <span id="val-mu" class="value-display">0</span></label>
 					<input id="slider-mu" type="range" min="-10" max="10" value="0" step="0.5">
 				</div>
 				<div class="control-group">
-					<label>Desvio Padrão (σ): <span id="val-sigma" class="value-display">1</span></label>
+					<label>Desvio Padrão ($\sigma$): <span id="val-sigma" class="value-display">1</span></label>
 					<input id="slider-sigma" type="range" min="0.5" max="5" value="1" step="0.1">
 				</div>
-				<p class="explanation">A Média desloca a curva horizontalmente. O Desvio Padrão controla o quão achatada (dispersa) ou pontiaguda (concentrada) a curva é.</p>
+				<p class="explanation">A **Média** desloca a curva horizontalmente. O **Desvio Padrão** controla o quão achatada (dispersa) ou pontiaguda (concentrada) a curva é.</p>
 			</div>
 
 			<!-- Uniform Controls -->
 			<div id="controls-uniforme" class="param-controls">
 				<div class="control-group">
-					<label>Mínimo (a): <span id="val-a" class="value-display">-5</span></label>
+					<label>Mínimo ($a$): <span id="val-a" class="value-display">-5</span></label>
 					<input id="slider-a" type="range" min="-10" max="9" value="-5" step="1">
 				</div>
 				<div class="control-group">
-					<label>Máximo (b): <span id="val-b" class="value-display">5</span></label>
+					<label>Máximo ($b$): <span id="val-b" class="value-display">5</span></label>
 					<input id="slider-b" type="range" min="-9" max="10" value="5" step="1">
 				</div>
-				<p class="explanation">A área total de um retângulo é base × altura = 1. Se a base (b-a) aumenta, a altura (probabilidade) diminui para manter a área 1.</p>
+				<p class="explanation">A área total de um retângulo é base $\times$ altura $= 1$. Se a base $(b-a)$ aumenta, a altura (probabilidade) diminui para manter a área 1.</p>
 			</div>
 
 			<!-- Exponential Controls -->
 			<div id="controls-exponencial" class="param-controls">
 				<div class="control-group">
-					<label>Taxa (λ): <span id="val-lambda" class="value-display">1</span></label>
+					<label>Taxa ($\lambda$): <span id="val-lambda" class="value-display">1</span></label>
 					<input id="slider-lambda" type="range" min="0.1" max="3" value="1" step="0.1">
 				</div>
-				<p class="explanation">A Taxa (λ) indica a frequência de ocorrência do evento. Quanto maior a taxa, mais rápido a curva decai (eventos acontecem mais rápido).</p>
+				<p class="explanation">A **Taxa** ($\lambda$) indica a frequência de ocorrência do evento. Quanto maior a taxa, mais rápido a curva decai (eventos acontecem mais rápido).</p>
 			</div>
 		</div>
 
 		<div class="chart-panel">
 			<canvas id="labChart"></canvas>
-		</div>
-	</div>
-
-	<div class="calc-section">
-		<h2>Calculadora de Probabilidade</h2>
-		<p class="calc-subtitle">Usa a distribuição e os parâmetros selecionados acima. A área calculada é destacada no gráfico.</p>
-
-		<div class="calc-body">
-			<div class="calc-controls">
-				<div class="calc-type-group">
-					<button class="calc-type-btn active" data-type="leq">P(X &le; x)</button>
-					<button class="calc-type-btn" data-type="geq">P(X &ge; x)</button>
-					<button class="calc-type-btn" data-type="between">P(a &le; X &le; b)</button>
-				</div>
-
-				<div id="inputs-leq" class="calc-inputs active">
-					<div class="input-row">
-						<label for="input-leq-x">x =</label>
-						<input type="number" id="input-leq-x" value="0" step="0.1" class="num-input">
-					</div>
-				</div>
-
-				<div id="inputs-geq" class="calc-inputs">
-					<div class="input-row">
-						<label for="input-geq-x">x =</label>
-						<input type="number" id="input-geq-x" value="0" step="0.1" class="num-input">
-					</div>
-				</div>
-
-				<div id="inputs-between" class="calc-inputs">
-					<div class="input-row">
-						<label for="input-bet-a">a =</label>
-						<input type="number" id="input-bet-a" value="-1" step="0.1" class="num-input">
-					</div>
-					<div class="input-row">
-						<label for="input-bet-b">b =</label>
-						<input type="number" id="input-bet-b" value="1" step="0.1" class="num-input">
-					</div>
-				</div>
-			</div>
-
-			<div class="calc-result">
-				<div class="result-label" id="result-formula">P(X &le; 0)</div>
-				<div class="result-value" id="result-value">0.5000</div>
-			</div>
 		</div>
 	</div>
 </Layout>
@@ -113,275 +68,162 @@ import Layout from '../layouts/Layout.astro';
 		const canvas = document.getElementById('labChart') as HTMLCanvasElement;
 		if (!canvas) return;
 
-		let chart: Chart | null = null;
-		let chartLabels: string[] = [];
-		let chartData: number[] = [];
-
+		let chart: Chart;
 		const distSelect = document.getElementById('dist-select') as HTMLSelectElement;
+
+		// UI Elements
 		const controlsGroups = document.querySelectorAll('.param-controls');
+		
+		// Normal inputs
+		const sliderMu = document.getElementById('slider-mu') as HTMLInputElement;
+		const sliderSigma = document.getElementById('slider-sigma') as HTMLInputElement;
+		const valMu = document.getElementById('val-mu');
+		const valSigma = document.getElementById('val-sigma');
 
-		const sliderMu     = document.getElementById('slider-mu')     as HTMLInputElement;
-		const sliderSigma  = document.getElementById('slider-sigma')  as HTMLInputElement;
-		const valMu        = document.getElementById('val-mu');
-		const valSigma     = document.getElementById('val-sigma');
-
+		// Uniform inputs
 		const sliderA = document.getElementById('slider-a') as HTMLInputElement;
 		const sliderB = document.getElementById('slider-b') as HTMLInputElement;
-		const valA    = document.getElementById('val-a');
-		const valB    = document.getElementById('val-b');
+		const valA = document.getElementById('val-a');
+		const valB = document.getElementById('val-b');
 
+		// Exponential inputs
 		const sliderLambda = document.getElementById('slider-lambda') as HTMLInputElement;
-		const valLambda    = document.getElementById('val-lambda');
+		const valLambda = document.getElementById('val-lambda');
 
-		// Calculator state
-		let calcType = 'leq';
-		const calcTypeBtns = document.querySelectorAll('.calc-type-btn');
-		const inputLeqX = document.getElementById('input-leq-x') as HTMLInputElement;
-		const inputGeqX = document.getElementById('input-geq-x') as HTMLInputElement;
-		const inputBetA = document.getElementById('input-bet-a') as HTMLInputElement;
-		const inputBetB = document.getElementById('input-bet-b') as HTMLInputElement;
-		const resultFormula = document.getElementById('result-formula');
-		const resultValue   = document.getElementById('result-value');
-
-		// PDF functions
-		const pdfNormal = (x: number, mu: number, sigma: number) =>
-			(1 / (sigma * Math.sqrt(2 * Math.PI))) * Math.exp(-0.5 * Math.pow((x - mu) / sigma, 2));
-
-		const pdfUniform = (x: number, a: number, b: number) =>
-			(x >= a && x <= b) ? 1 / (b - a) : 0;
-
-		const pdfExponential = (x: number, lambda: number) =>
-			x >= 0 ? lambda * Math.exp(-lambda * x) : 0;
-
-		// CDF functions
-		function erf(x: number): number {
-			const a1 =  0.254829592;
-			const a2 = -0.284496736;
-			const a3 =  1.421413741;
-			const a4 = -1.453152027;
-			const a5 =  1.061405429;
-			const p  =  0.3275911;
-			const sign = x < 0 ? -1 : 1;
-			const ax = Math.abs(x);
-			const t = 1.0 / (1.0 + p * ax);
-			const y = 1.0 - (((((a5 * t + a4) * t) + a3) * t + a2) * t + a1) * t * Math.exp(-ax * ax);
-			return sign * y;
-		}
-
-		const cdfNormal = (x: number, mu: number, sigma: number) =>
-			0.5 * (1 + erf((x - mu) / (sigma * Math.SQRT2)));
-
-		const cdfUniform = (x: number, a: number, b: number) => {
-			if (x <= a) return 0;
-			if (x >= b) return 1;
-			return (x - a) / (b - a);
+		// Math Functions
+		const pdfNormal = (x: number, mu: number, sigma: number) => {
+			return (1 / (sigma * Math.sqrt(2 * Math.PI))) * Math.exp(-0.5 * Math.pow((x - mu) / sigma, 2));
 		};
 
-		const cdfExponential = (x: number, lambda: number) =>
-			x <= 0 ? 0 : 1 - Math.exp(-lambda * x);
+		const pdfUniform = (x: number, a: number, b: number) => {
+			if (x >= a && x <= b) return 1 / (b - a);
+			return 0;
+		};
 
-		function getCurrentCDF(x: number): number {
-			const type = distSelect.value;
-			if (type === 'normal') {
-				return cdfNormal(x, parseFloat(sliderMu.value), parseFloat(sliderSigma.value));
-			} else if (type === 'uniforme') {
-				return cdfUniform(x, parseFloat(sliderA.value), parseFloat(sliderB.value));
-			} else {
-				return cdfExponential(x, parseFloat(sliderLambda.value));
-			}
-		}
-
-		function getCalcX1(): number {
-			if (calcType === 'leq')     return parseFloat(inputLeqX.value) || 0;
-			if (calcType === 'geq')     return parseFloat(inputGeqX.value) || 0;
-			return parseFloat(inputBetA.value) || -1;
-		}
-
-		function getCalcX2(): number {
-			return parseFloat(inputBetB.value) || 1;
-		}
-
-		function computeProbability(): number {
-			const x1 = getCalcX1();
-			const x2 = getCalcX2();
-			if (calcType === 'leq')     return getCurrentCDF(x1);
-			if (calcType === 'geq')     return 1 - getCurrentCDF(x1);
-			return Math.max(0, Math.min(1, getCurrentCDF(x2) - getCurrentCDF(x1)));
-		}
-
-		function getFormulaText(): string {
-			const x1 = getCalcX1();
-			const x2 = getCalcX2();
-			const fmt = (v: number) => Number.isInteger(v) ? v.toString() : v.toFixed(2);
-			if (calcType === 'leq')     return `P(X ≤ ${fmt(x1)})`;
-			if (calcType === 'geq')     return `P(X ≥ ${fmt(x1)})`;
-			return `P(${fmt(x1)} ≤ X ≤ ${fmt(x2)})`;
-		}
-
-		function getHighlightData(): (number | null)[] {
-			const x1 = getCalcX1();
-			const x2 = getCalcX2();
-			return chartData.map((val, i) => {
-				const x = parseFloat(chartLabels[i]);
-				if (calcType === 'leq')     return x <= x1 ? val : null;
-				if (calcType === 'geq')     return x >= x1 ? val : null;
-				return (x >= x1 && x <= x2) ? val : null;
-			});
-		}
-
-		function updateCalc() {
-			const prob = computeProbability();
-			if (resultFormula) resultFormula.textContent = getFormulaText();
-			if (resultValue)   resultValue.textContent = prob.toFixed(4);
-
-			if (chart) {
-				chart.data.datasets[1].data = getHighlightData();
-				chart.update();
-			}
-		}
+		const pdfExponential = (x: number, lambda: number) => {
+			if (x >= 0) return lambda * Math.exp(-lambda * x);
+			return 0;
+		};
 
 		function updateChart() {
 			const type = distSelect.value;
-			chartLabels = [];
-			chartData   = [];
+			let labels = [];
+			let data = [];
 			let labelText = '';
 			let maxY = 1;
-			let isStepped: false | 'middle' = false;
-
+			
+			// Show correct controls
 			controlsGroups.forEach(el => el.classList.remove('active'));
 			document.getElementById(`controls-${type}`)?.classList.add('active');
 
 			if (type === 'normal') {
-				const mu    = parseFloat(sliderMu.value);
+				const mu = parseFloat(sliderMu.value);
 				const sigma = parseFloat(sliderSigma.value);
-				if (valMu)    valMu.textContent    = mu.toFixed(1);
-				if (valSigma) valSigma.textContent = sigma.toFixed(1);
+				if(valMu) valMu.textContent = mu.toFixed(1);
+				if(valSigma) valSigma.textContent = sigma.toFixed(1);
 				labelText = `Normal(μ=${mu.toFixed(1)}, σ=${sigma.toFixed(1)})`;
 				maxY = 0.8;
+
 				for (let x = -15; x <= 15; x += 0.2) {
-					chartLabels.push(x.toFixed(1));
-					chartData.push(pdfNormal(x, mu, sigma));
+					labels.push(x.toFixed(1));
+					data.push(pdfNormal(x, mu, sigma));
 				}
 			} else if (type === 'uniforme') {
 				let a = parseFloat(sliderA.value);
 				let b = parseFloat(sliderB.value);
-				if (a >= b) { a = b - 1; sliderA.value = a.toString(); }
-				if (valA) valA.textContent = a.toString();
-				if (valB) valB.textContent = b.toString();
-				labelText  = `Uniforme(${a}, ${b})`;
-				maxY       = 1;
-				isStepped  = 'middle';
+				
+				// Ensure a < b
+				if (a >= b) {
+					a = b - 1;
+					sliderA.value = a.toString();
+				}
+				
+				if(valA) valA.textContent = a.toString();
+				if(valB) valB.textContent = b.toString();
+				labelText = `Uniforme(${a}, ${b})`;
+				maxY = 1;
+
 				for (let x = -15; x <= 15; x += 0.2) {
-					chartLabels.push(x.toFixed(1));
-					chartData.push(pdfUniform(x, a, b));
+					labels.push(x.toFixed(1));
+					// Chart.js line charts don't do steps well by default without duplicate points,
+					// but dense points make it look okay.
+					data.push(pdfUniform(x, a, b));
 				}
 			} else if (type === 'exponencial') {
 				const lambda = parseFloat(sliderLambda.value);
-				if (valLambda) valLambda.textContent = lambda.toFixed(1);
+				if(valLambda) valLambda.textContent = lambda.toFixed(1);
 				labelText = `Exponencial(λ=${lambda.toFixed(1)})`;
-				maxY = 3;
+				maxY = 3; // lambda can go up to 3
+
 				for (let x = -2; x <= 10; x += 0.1) {
-					chartLabels.push(x.toFixed(1));
-					chartData.push(pdfExponential(x, lambda));
+					labels.push(x.toFixed(1));
+					data.push(pdfExponential(x, lambda));
 				}
 			}
 
-			const highlightData = getHighlightData();
-			const tension = type === 'uniforme' ? 0 : 0.4;
-
 			if (chart) {
-				chart.data.labels                   = chartLabels;
-				chart.data.datasets[0].data         = chartData;
-				chart.data.datasets[0].label        = labelText;
-				chart.data.datasets[0].tension      = tension;
-				chart.data.datasets[0].stepped      = isStepped;
-				chart.data.datasets[1].data         = highlightData;
-				chart.data.datasets[1].tension      = tension;
-				chart.data.datasets[1].stepped      = isStepped;
-
-				if (chart.options.scales?.y) chart.options.scales.y.max = maxY;
+				chart.data.labels = labels;
+				chart.data.datasets[0].data = data;
+				chart.data.datasets[0].label = labelText;
+				
+				// Update Y scale max dynamically based on distribution
+				if (chart.options.scales && chart.options.scales.y) {
+					chart.options.scales.y.max = maxY;
+				}
+				
+				// For uniform distribution, use stepped line
+				chart.data.datasets[0].stepped = type === 'uniforme' ? 'middle' : false;
 
 				chart.update();
 			} else {
 				const ctx = canvas.getContext('2d');
-				if (!ctx) return;
-
+				if(!ctx) return;
+				
 				chart = new Chart(ctx, {
 					type: 'line',
 					data: {
-						labels: chartLabels,
-						datasets: [
-							{
-								label: labelText,
-								data: chartData,
-								borderColor: 'rgba(37, 99, 235, 0.5)',
-								backgroundColor: 'transparent',
-								borderWidth: 2,
-								pointRadius: 0,
-								fill: false,
-								tension,
-								stepped: isStepped
-							},
-							{
-								label: 'area',
-								data: highlightData,
-								borderColor: 'transparent',
-								backgroundColor: 'rgba(37, 99, 235, 0.35)',
-								borderWidth: 0,
-								pointRadius: 0,
-								fill: 'origin',
-								tension,
-								stepped: isStepped
-							}
-						]
+						labels: labels,
+						datasets: [{
+							label: labelText,
+							data: data,
+							borderColor: 'rgb(37, 99, 235)',
+							backgroundColor: 'rgba(37, 99, 235, 0.2)',
+							borderWidth: 2,
+							pointRadius: 0,
+							fill: true,
+							tension: type === 'uniforme' ? 0 : 0.4,
+							stepped: type === 'uniforme' ? 'middle' : false
+						}]
 					},
 					options: {
 						responsive: true,
 						maintainAspectRatio: false,
-						plugins: {
-							legend: { display: false }
-						},
 						scales: {
-							y: {
-								beginAtZero: true,
+							y: { 
+								beginAtZero: true, 
 								title: { display: true, text: 'Densidade f(x)' },
 								max: maxY
 							},
-							x: {
+							x: { 
 								title: { display: true, text: 'Valores de x' },
 								ticks: { maxTicksLimit: 15 }
 							}
 						},
-						animation: { duration: 0 }
+						animation: { duration: 0 } // disable animation for smooth slider tracking
 					}
 				});
 			}
-
-			updateCalc();
 		}
 
-		// Calculator event listeners
-		calcTypeBtns.forEach(btn => {
-			btn.addEventListener('click', () => {
-				calcTypeBtns.forEach(b => b.classList.remove('active'));
-				btn.classList.add('active');
-				calcType = (btn as HTMLElement).dataset.type || 'leq';
-				document.querySelectorAll('.calc-inputs').forEach(el => el.classList.remove('active'));
-				document.getElementById(`inputs-${calcType}`)?.classList.add('active');
-				updateCalc();
-			});
-		});
-
-		[inputLeqX, inputGeqX, inputBetA, inputBetB].forEach(input => {
-			if (input) input.addEventListener('input', updateCalc);
-		});
-
-		// Distribution event listeners
+		// Event Listeners
 		distSelect.addEventListener('change', updateChart);
+		
+		// Setup all slider listeners
 		[sliderMu, sliderSigma, sliderA, sliderB, sliderLambda].forEach(slider => {
-			if (slider) slider.addEventListener('input', updateChart);
+			if(slider) slider.addEventListener('input', updateChart);
 		});
 
+		// Initial render
 		updateChart();
 	});
 </script>
@@ -491,135 +333,5 @@ import Layout from '../layouts/Layout.astro';
 		border: 1px solid var(--color-border);
 		box-shadow: var(--shadow-sm);
 		height: 500px;
-	}
-
-	/* Calculator section */
-	.calc-section {
-		margin-top: var(--space-8);
-		background-color: var(--color-surface);
-		padding: var(--space-6);
-		border-radius: var(--radius-lg);
-		border: 1px solid var(--color-border);
-		box-shadow: var(--shadow-sm);
-	}
-
-	.calc-section h2 {
-		font-size: 1.75rem;
-		margin-bottom: var(--space-1);
-		color: var(--color-primary);
-	}
-
-	.calc-subtitle {
-		color: var(--color-text-muted);
-		margin-bottom: var(--space-6);
-	}
-
-	.calc-body {
-		display: flex;
-		gap: var(--space-8);
-		align-items: center;
-	}
-
-	@media (max-width: 700px) {
-		.calc-body {
-			flex-direction: column;
-			align-items: flex-start;
-		}
-	}
-
-	.calc-type-group {
-		display: flex;
-		gap: var(--space-2);
-		margin-bottom: var(--space-5);
-		flex-wrap: wrap;
-	}
-
-	.calc-type-btn {
-		padding: var(--space-2) var(--space-4);
-		border: 2px solid var(--color-border);
-		border-radius: var(--radius-md);
-		background: var(--color-bg);
-		cursor: pointer;
-		font-size: 0.95rem;
-		font-family: var(--font-mono);
-		transition: border-color 0.15s, background-color 0.15s, color 0.15s;
-	}
-
-	.calc-type-btn.active {
-		border-color: var(--color-primary);
-		background-color: var(--color-primary);
-		color: white;
-	}
-
-	.calc-type-btn:hover:not(.active) {
-		border-color: var(--color-primary);
-		color: var(--color-primary);
-	}
-
-	.calc-inputs {
-		display: none;
-		flex-direction: column;
-		gap: var(--space-3);
-	}
-
-	.calc-inputs.active {
-		display: flex;
-	}
-
-	.input-row {
-		display: flex;
-		align-items: center;
-		gap: var(--space-3);
-	}
-
-	.input-row label {
-		font-family: var(--font-mono);
-		font-weight: 600;
-		color: var(--color-text-muted);
-		min-width: 2.5rem;
-	}
-
-	.num-input {
-		width: 110px;
-		padding: var(--space-2) var(--space-3);
-		border: 1px solid var(--color-border);
-		border-radius: var(--radius-md);
-		background-color: var(--color-bg);
-		font-size: 1rem;
-		font-family: var(--font-mono);
-	}
-
-	.num-input:focus {
-		outline: none;
-		border-color: var(--color-primary);
-	}
-
-	.calc-result {
-		flex: 1;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		background-color: var(--color-bg);
-		border: 2px solid var(--color-primary);
-		border-radius: var(--radius-lg);
-		padding: var(--space-6) var(--space-8);
-		min-width: 200px;
-		text-align: center;
-	}
-
-	.result-label {
-		font-family: var(--font-mono);
-		font-size: 1.05rem;
-		color: var(--color-text-muted);
-		margin-bottom: var(--space-2);
-	}
-
-	.result-value {
-		font-family: var(--font-mono);
-		font-size: 2.75rem;
-		font-weight: 700;
-		color: var(--color-primary);
-		line-height: 1;
 	}
 </style>
