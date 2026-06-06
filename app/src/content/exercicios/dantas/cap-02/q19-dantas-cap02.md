@@ -2,7 +2,7 @@
 id: "q19-dantas-cap02"
 titulo: "Questão 19"
 topicos: ["03-modelos-continuos","02-funcao-geradora-momentos"]
-dificuldade: "dificil"
+dificuldade: "alta"
 origem: "livro"
 solucao_verificada: false
 ---

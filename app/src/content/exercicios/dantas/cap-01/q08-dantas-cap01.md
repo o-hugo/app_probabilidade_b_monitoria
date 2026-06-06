@@ -2,7 +2,7 @@
 id: "q08-dantas-cap01"
 titulo: "Questão 8"
 topicos: ["variaveis-aleatorias-continuas"]
-dificuldade: "dificil"
+dificuldade: "alta"
 origem: "livro"
 solucao_verificada: false
 ---

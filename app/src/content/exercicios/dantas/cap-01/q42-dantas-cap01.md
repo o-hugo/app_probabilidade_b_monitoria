@@ -2,7 +2,7 @@
 id: "q42-dantas-cap01"
 titulo: "Questão 42"
 topicos: ["variaveis-aleatorias-continuas"]
-dificuldade: "dificil"
+dificuldade: "alta"
 origem: "livro"
 solucao_verificada: false
 ---

@@ -2,7 +2,7 @@
 id: "q31-dantas-cap01"
 titulo: "Questão 31"
 topicos: ["variaveis-aleatorias-continuas"]
-dificuldade: "dificil"
+dificuldade: "alta"
 origem: "livro"
 solucao_verificada: false
 ---

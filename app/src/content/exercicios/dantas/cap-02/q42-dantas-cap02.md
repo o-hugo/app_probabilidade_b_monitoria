@@ -2,7 +2,7 @@
 id: "q42-dantas-cap02"
 titulo: "Questão 42"
 topicos: ["03-modelos-continuos"]
-dificuldade: "dificil"
+dificuldade: "alta"
 origem: "livro"
 solucao_verificada: false
 ---
