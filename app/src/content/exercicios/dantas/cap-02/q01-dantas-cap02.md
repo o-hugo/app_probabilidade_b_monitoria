@@ -2,7 +2,7 @@
 id: "q01-dantas-cap02"
 titulo: "Questão 1"
 topicos: ["03-modelos-continuos"]
-dificuldade: "facil"
+dificuldade: "baixa"
 origem: "livro"
 solucao_verificada: false
 ---
