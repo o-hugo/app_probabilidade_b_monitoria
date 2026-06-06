@@ -1,0 +1,348 @@
+---
+import Layout from '../layouts/Layout.astro';
+import katex from 'katex';
+
+const k = (tex: string) =>
+  katex.renderToString(tex, { throwOnError: false, output: 'html' });
+
+const NA = '<span class="cell-na">—</span>';
+
+const distributions = [
+  {
+    nome: 'Uniforme',
+    notacao: 'U(a, b)',
+    domain_type: 'finito',
+    fdp_formula: k('\\dfrac{1}{b-a}'),
+    fdp_domain: k('a \\leq x \\leq b'),
+    ex: k('\\dfrac{a+b}{2}'),
+    varx: k('\\dfrac{(b-a)^2}{12}'),
+    fgm: k('\\dfrac{e^{tb}-e^{ta}}{t(b-a)}'),
+  },
+  {
+    nome: 'Normal',
+    notacao: 'N(μ, σ²)',
+    domain_type: 'real',
+    fdp_formula: k('\\dfrac{1}{\\sigma\\sqrt{2\\pi}}\\,e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}'),
+    fdp_domain: k('-\\infty < x < \\infty'),
+    ex: k('\\mu'),
+    varx: k('\\sigma^2'),
+    fgm: k('e^{\\mu t + \\frac{\\sigma^2 t^2}{2}}'),
+  },
+  {
+    nome: 'Exponencial',
+    notacao: 'Exp(λ)',
+    domain_type: 'semi',
+    fdp_formula: k('\\lambda\\,e^{-\\lambda x}'),
+    fdp_domain: k('x \\geq 0'),
+    ex: k('\\dfrac{1}{\\lambda}'),
+    varx: k('\\dfrac{1}{\\lambda^2}'),
+    fgm: k('\\dfrac{\\lambda}{\\lambda-t},\\quad t < \\lambda'),
+  },
+  {
+    nome: 'Gama',
+    notacao: 'Γ(α, β)',
+    domain_type: 'semi',
+    fdp_formula: k('\\dfrac{x^{\\alpha-1}\\,e^{-x/\\beta}}{\\beta^\\alpha\\,\\Gamma(\\alpha)}'),
+    fdp_domain: k('x > 0'),
+    ex: k('\\alpha\\beta'),
+    varx: k('\\alpha\\beta^2'),
+    fgm: k('\\left(\\dfrac{1}{1-\\beta t}\\right)^{\\!\\alpha},\\quad t < \\dfrac{1}{\\beta}'),
+  },
+  {
+    nome: 'Beta',
+    notacao: 'Beta(α, β)',
+    domain_type: 'finito',
+    fdp_formula: k('\\dfrac{x^{\\alpha-1}(1-x)^{\\beta-1}}{B(\\alpha,\\beta)}'),
+    fdp_domain: k('0 < x < 1'),
+    ex: k('\\dfrac{\\alpha}{\\alpha+\\beta}'),
+    varx: k('\\dfrac{\\alpha\\beta}{(\\alpha+\\beta)^2(\\alpha+\\beta+1)}'),
+    fgm: NA,
+  },
+  {
+    nome: 'Laplace',
+    notacao: 'L(μ, b)',
+    domain_type: 'real',
+    fdp_formula: k('\\dfrac{1}{2b}\\,e^{-|x-\\mu|/b}'),
+    fdp_domain: k('-\\infty < x < \\infty'),
+    ex: k('\\mu'),
+    varx: k('2b^2'),
+    fgm: k('\\dfrac{e^{\\mu t}}{1-b^2t^2},\\quad |t| < \\dfrac{1}{b}'),
+  },
+  {
+    nome: 'Weibull',
+    notacao: 'W(α, β)',
+    domain_type: 'semi',
+    fdp_formula: k('\\dfrac{\\alpha}{\\beta}\\!\\left(\\dfrac{x}{\\beta}\\right)^{\\!\\alpha-1}\\!e^{-(x/\\beta)^\\alpha}'),
+    fdp_domain: k('x > 0'),
+    ex: k('\\beta\\,\\Gamma\\!\\left(1+\\dfrac{1}{\\alpha}\\right)'),
+    varx: k('\\beta^2\\!\\left[\\Gamma\\!\\left(1+\\tfrac{2}{\\alpha}\\right)-\\Gamma^2\\!\\left(1+\\tfrac{1}{\\alpha}\\right)\\right]'),
+    fgm: NA,
+  },
+  {
+    nome: 'Pareto',
+    notacao: 'P(α, xₘ)',
+    domain_type: 'semi',
+    fdp_formula: k('\\dfrac{\\alpha\\,x_m^\\alpha}{x^{\\alpha+1}}'),
+    fdp_domain: k('x \\geq x_m > 0'),
+    ex: k('\\dfrac{\\alpha\\,x_m}{\\alpha-1},\\;\\alpha>1'),
+    varx: k('\\dfrac{\\alpha\\,x_m^2}{(\\alpha-1)^2(\\alpha-2)},\\;\\alpha>2'),
+    fgm: NA,
+  },
+  {
+    nome: 'Lognormal',
+    notacao: 'LN(μ, σ²)',
+    domain_type: 'semi',
+    fdp_formula: k('\\dfrac{1}{x\\sigma\\sqrt{2\\pi}}\\,e^{-\\frac{(\\ln x-\\mu)^2}{2\\sigma^2}}'),
+    fdp_domain: k('x > 0'),
+    ex: k('e^{\\mu+\\sigma^2/2}'),
+    varx: k('\\left(e^{\\sigma^2}-1\\right)e^{2\\mu+\\sigma^2}'),
+    fgm: NA,
+  },
+  {
+    nome: 'Cauchy',
+    notacao: 'C(x₀, γ)',
+    domain_type: 'real',
+    fdp_formula: k('\\dfrac{1}{\\pi\\gamma\\!\\left[1+\\left(\\frac{x-x_0}{\\gamma}\\right)^{\\!2}\\right]}'),
+    fdp_domain: k('-\\infty < x < \\infty'),
+    ex: NA,
+    varx: NA,
+    fgm: NA,
+  },
+];
+
+const domainLabels: Record<string, string> = {
+  finito: 'Domínio finito',
+  semi:   'x ≥ 0',
+  real:   'Todo ℝ',
+};
+---
+
+<Layout title="Tabela de Distribuições">
+  <div class="page-header">
+    <h1>Tabela Comparativa de Distribuições</h1>
+    <p>Referência rápida com FDP, E[X], Var[X] e FGM das principais distribuições contínuas do curso.</p>
+  </div>
+
+  <div class="filter-bar">
+    <span class="filter-label">Filtrar por domínio:</span>
+    <div class="filter-group">
+      <button class="filter-btn active" data-filter="all">Todas</button>
+      <button class="filter-btn" data-filter="finito">Domínio finito</button>
+      <button class="filter-btn" data-filter="semi">x &ge; 0</button>
+      <button class="filter-btn" data-filter="real">Todo &Ropf;</button>
+    </div>
+  </div>
+
+  <div class="table-wrapper">
+    <table class="dist-table">
+      <thead>
+        <tr>
+          <th>Distribuição</th>
+          <th>FDP f(x)</th>
+          <th>Domínio</th>
+          <th>E[X]</th>
+          <th>Var[X]</th>
+          <th>FGM M<sub>X</sub>(t)</th>
+        </tr>
+      </thead>
+      <tbody>
+        {distributions.map(d => (
+          <tr data-domain={d.domain_type}>
+            <td class="cell-name">
+              <span class="dist-nome">{d.nome}</span>
+              <span class="dist-notacao">{d.notacao}</span>
+              <span class={`domain-badge domain-${d.domain_type}`}>{domainLabels[d.domain_type]}</span>
+            </td>
+            <td class="cell-formula" set:html={d.fdp_formula} />
+            <td class="cell-domain" set:html={d.fdp_domain} />
+            <td class="cell-formula" set:html={d.ex} />
+            <td class="cell-formula" set:html={d.varx} />
+            <td class="cell-formula cell-fgm" set:html={d.fgm} />
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <p class="footnote">
+    Gama: parâmetros de forma &alpha; e escala &beta; (E[X] = &alpha;&beta;).
+    Weibull: parâmetros de forma &alpha; e escala &beta; (W(1, &beta;) = Exp(1/&beta;)).
+    FGM marcada com &ldquo;&mdash;&rdquo; quando não possui forma fechada simples.
+  </p>
+</Layout>
+
+<script>
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filter = (btn as HTMLElement).dataset.filter;
+      document.querySelectorAll<HTMLTableRowElement>('tr[data-domain]').forEach(row => {
+        row.style.display = (filter === 'all' || row.dataset.domain === filter) ? '' : 'none';
+      });
+    });
+  });
+</script>
+
+<style>
+  .page-header {
+    margin-bottom: var(--space-6);
+  }
+
+  .page-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: var(--space-2);
+    color: var(--color-primary);
+  }
+
+  .page-header p {
+    font-size: 1.1rem;
+    color: var(--color-text-muted);
+  }
+
+  .filter-bar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    margin-bottom: var(--space-6);
+    flex-wrap: wrap;
+  }
+
+  .filter-label {
+    font-weight: 600;
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+  }
+
+  .filter-group {
+    display: flex;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    padding: var(--space-1) var(--space-3);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-bg);
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: border-color 0.15s, background-color 0.15s, color 0.15s;
+  }
+
+  .filter-btn.active {
+    border-color: var(--color-primary);
+    background-color: var(--color-primary);
+    color: white;
+  }
+
+  .filter-btn:hover:not(.active) {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+
+  .table-wrapper {
+    overflow-x: auto;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .dist-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--color-surface);
+    font-size: 0.9rem;
+  }
+
+  .dist-table thead {
+    background-color: var(--color-primary);
+    color: white;
+  }
+
+  .dist-table th {
+    padding: var(--space-3) var(--space-4);
+    text-align: left;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .dist-table td {
+    padding: var(--space-3) var(--space-4);
+    border-top: 1px solid var(--color-border);
+    vertical-align: middle;
+  }
+
+  .dist-table tbody tr:hover {
+    background-color: var(--color-bg);
+  }
+
+  .cell-name {
+    min-width: 140px;
+  }
+
+  .dist-nome {
+    display: block;
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+
+  .dist-notacao {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    margin-top: 2px;
+  }
+
+  .domain-badge {
+    display: inline-block;
+    margin-top: var(--space-1);
+    padding: 2px var(--space-2);
+    border-radius: 9999px;
+    font-size: 0.72rem;
+    font-weight: 500;
+  }
+
+  .domain-finito {
+    background-color: #dbeafe;
+    color: #1e40af;
+  }
+
+  .domain-semi {
+    background-color: #d1fae5;
+    color: #065f46;
+  }
+
+  .domain-real {
+    background-color: #fef3c7;
+    color: #92400e;
+  }
+
+  .cell-formula {
+    min-width: 160px;
+    text-align: center;
+  }
+
+  .cell-domain {
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  .cell-fgm {
+    min-width: 200px;
+  }
+
+  .cell-na {
+    color: var(--color-text-muted);
+    font-size: 1.2rem;
+  }
+
+  .footnote {
+    margin-top: var(--space-4);
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+  }
+</style>
