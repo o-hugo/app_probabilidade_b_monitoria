@@ -1,7 +1,7 @@
 ---
 id: "questoes-q30-livro-exemplo-274-varincia-da-moeda"
 titulo: "Exemplo 2.7.4 (Variância da Moeda)"
-topicos: ["modelos-continuos"]
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false

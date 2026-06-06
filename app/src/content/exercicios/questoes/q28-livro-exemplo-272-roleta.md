@@ -1,7 +1,7 @@
 ---
 id: "questoes-q28-livro-exemplo-272-roleta"
 titulo: "Exemplo 2.7.2 (Roleta)"
-topicos: ["modelos-continuos"]
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false

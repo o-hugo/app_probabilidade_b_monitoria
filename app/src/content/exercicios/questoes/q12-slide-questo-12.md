@@ -1,7 +1,7 @@
 ---
 id: "questoes-q12-slide-questo-12"
 titulo: "Questão 12"
-topicos: ["modelos-continuos"]
+topicos: ["funcao-de-variavel-aleatoria"]
 dificuldade: "media"
 origem: "slide"
 solucao_verificada: false

@@ -1,7 +1,7 @@
 ---
 id: "lista02-q32-transformao-linear-de-uniforme"
 titulo: "Transformação Linear de Uniforme"
-topicos: ["modelos-continuos"]
+topicos: ["funcao-de-variavel-aleatoria", "modelos-continuos"]
 dificuldade: "media"
 origem: "lista-02"
 solucao_verificada: false

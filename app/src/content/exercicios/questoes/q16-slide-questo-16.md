@@ -1,7 +1,7 @@
 ---
 id: "questoes-q16-slide-questo-16"
 titulo: "Questão 16"
-topicos: ["modelos-continuos"]
+topicos: ["funcao-de-variavel-aleatoria", "modelos-continuos"]
 dificuldade: "media"
 origem: "slide"
 solucao_verificada: false

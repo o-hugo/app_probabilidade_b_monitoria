@@ -1,7 +1,7 @@
 ---
 id: "lista02-q40-transformao-de-beta"
 titulo: "Transformação de Beta"
-topicos: ["modelos-continuos"]
+topicos: ["funcao-de-variavel-aleatoria", "modelos-continuos"]
 dificuldade: "media"
 origem: "lista-02"
 solucao_verificada: false

@@ -1,7 +1,7 @@
 ---
 id: "questoes-q03-lista-questo-3"
 titulo: "Questão 3"
-topicos: ["modelos-continuos"]
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "lista"
 solucao_verificada: false

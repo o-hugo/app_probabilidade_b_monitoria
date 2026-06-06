@@ -1,7 +1,7 @@
 ---
 id: "lista02-q33-transformada-integral-de-probabilidade"
 titulo: "Transformada Integral de Probabilidade"
-topicos: ["modelos-continuos"]
+topicos: ["funcao-de-variavel-aleatoria"]
 dificuldade: "media"
 origem: "lista-02"
 solucao_verificada: false

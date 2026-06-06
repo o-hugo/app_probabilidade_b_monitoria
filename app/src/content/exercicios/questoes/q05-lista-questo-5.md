@@ -1,7 +1,7 @@
 ---
 id: "questoes-q05-lista-questo-5"
 titulo: "Questão 5"
-topicos: ["modelos-continuos"]
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "lista"
 solucao_verificada: false

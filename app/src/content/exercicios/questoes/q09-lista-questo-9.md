@@ -1,7 +1,7 @@
 ---
 id: "questoes-q09-lista-questo-9"
 titulo: "Questão 9"
-topicos: ["modelos-continuos"]
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "lista"
 solucao_verificada: false

@@ -1,7 +1,7 @@
 ---
 id: "questoes-q15-slide-questo-15"
 titulo: "Questão 15"
-topicos: ["modelos-continuos"]
+topicos: ["funcao-de-variavel-aleatoria"]
 dificuldade: "media"
 origem: "slide"
 solucao_verificada: false

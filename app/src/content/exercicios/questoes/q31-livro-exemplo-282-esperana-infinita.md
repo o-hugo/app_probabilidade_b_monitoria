@@ -1,7 +1,7 @@
 ---
 id: "questoes-q31-livro-exemplo-282-esperana-infinita"
 titulo: "Exemplo 2.8.2 (Esperança Infinita)"
-topicos: ["modelos-continuos"]
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false

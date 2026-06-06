@@ -1,7 +1,7 @@
 ---
 id: "questoes-q11-lista-questo-11"
 titulo: "Questão 11"
-topicos: ["modelos-continuos"]
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "lista"
 solucao_verificada: false

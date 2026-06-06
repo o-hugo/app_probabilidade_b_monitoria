@@ -1,7 +1,7 @@
 ---
 id: "lista02-q31-weibull-e-exponencial"
 titulo: "Weibull e Exponencial"
-topicos: ["modelos-continuos"]
+topicos: ["funcao-de-variavel-aleatoria", "modelos-continuos"]
 dificuldade: "media"
 origem: "lista-02"
 solucao_verificada: false

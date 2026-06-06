@@ -1,7 +1,7 @@
 ---
 id: "questoes-q26-livro-exemplo-242-fda-em-degraus"
 titulo: "Exemplo 2.4.2 (FDA em Degraus)"
-topicos: ["modelos-continuos"]
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false

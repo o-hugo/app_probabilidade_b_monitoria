@@ -1,7 +1,7 @@
 ---
 id: "questoes-q29-livro-exemplo-273-dado"
 titulo: "Exemplo 2.7.3 (Dado)"
-topicos: ["modelos-continuos"]
+topicos: ["funcao-de-variavel-aleatoria"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false

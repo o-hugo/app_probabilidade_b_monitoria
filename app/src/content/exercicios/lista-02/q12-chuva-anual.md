@@ -1,7 +1,7 @@
 ---
 id: "lista02-q12-chuva-anual"
 titulo: "Chuva Anual"
-topicos: ["modelos-continuos"]
+topicos: ["distribuicao-normal"]
 dificuldade: "media"
 origem: "lista-02"
 solucao_verificada: false

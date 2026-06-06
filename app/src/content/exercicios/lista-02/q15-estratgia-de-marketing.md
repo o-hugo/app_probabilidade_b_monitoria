@@ -1,7 +1,7 @@
 ---
 id: "lista02-q15-estratgia-de-marketing"
 titulo: "Estratégia de Marketing"
-topicos: ["modelos-continuos"]
+topicos: ["distribuicao-normal"]
 dificuldade: "media"
 origem: "lista-02"
 solucao_verificada: false

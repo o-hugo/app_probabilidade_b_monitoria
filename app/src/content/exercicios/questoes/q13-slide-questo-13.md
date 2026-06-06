@@ -1,7 +1,7 @@
 ---
 id: "questoes-q13-slide-questo-13"
 titulo: "Questão 13"
-topicos: ["modelos-continuos"]
+topicos: ["funcao-de-variavel-aleatoria"]
 dificuldade: "media"
 origem: "slide"
 solucao_verificada: false

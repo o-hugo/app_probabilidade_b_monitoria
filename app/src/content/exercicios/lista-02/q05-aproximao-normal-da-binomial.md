@@ -1,7 +1,7 @@
 ---
 id: "lista02-q05-aproximao-normal-da-binomial"
 titulo: "Aproximação Normal da Binomial"
-topicos: ["modelos-continuos"]
+topicos: ["distribuicao-normal"]
 dificuldade: "media"
 origem: "lista-02"
 solucao_verificada: false

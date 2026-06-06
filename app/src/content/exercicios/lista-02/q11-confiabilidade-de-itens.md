@@ -1,7 +1,7 @@
 ---
 id: "lista02-q11-confiabilidade-de-itens"
 titulo: "Confiabilidade de Itens"
-topicos: ["modelos-continuos"]
+topicos: ["distribuicao-normal"]
 dificuldade: "media"
 origem: "lista-02"
 solucao_verificada: false

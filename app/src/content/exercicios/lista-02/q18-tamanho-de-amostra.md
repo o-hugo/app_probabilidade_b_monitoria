@@ -1,7 +1,7 @@
 ---
 id: "lista02-q18-tamanho-de-amostra"
 titulo: "Tamanho de Amostra"
-topicos: ["modelos-continuos"]
+topicos: ["distribuicao-normal"]
 dificuldade: "media"
 origem: "lista-02"
 solucao_verificada: false

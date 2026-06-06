@@ -1,7 +1,7 @@
 ---
 id: "questoes-q20-livro-exemplo-243"
 titulo: "Exemplo 2.4.3"
-topicos: ["modelos-continuos"]
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false

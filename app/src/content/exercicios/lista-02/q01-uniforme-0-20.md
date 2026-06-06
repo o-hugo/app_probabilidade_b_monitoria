@@ -1,7 +1,7 @@
 ---
 id: "lista02-q01-uniforme-0-20"
 titulo: "Distribuicao Uniforme (0, 20)"
-topicos: ["variaveis-aleatorias-continuas", "uniforme"]
+topicos: ["modelos-continuos"]
 dificuldade: "baixa"
 origem: "lista-02"
 metodo: "integral-direta"

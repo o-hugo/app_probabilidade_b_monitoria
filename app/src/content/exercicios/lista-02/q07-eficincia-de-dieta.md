@@ -1,7 +1,7 @@
 ---
 id: "lista02-q07-eficincia-de-dieta"
 titulo: "Eficiência de Dieta"
-topicos: ["modelos-continuos"]
+topicos: ["distribuicao-normal"]
 dificuldade: "media"
 origem: "lista-02"
 solucao_verificada: false
