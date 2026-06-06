@@ -3,12 +3,23 @@ import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 
 const exercicios = await getCollection('exercicios');
+const topicos    = await getCollection('topicos');
+
+// Map: slug-sem-prefixo -> titulo do topico
+const topicoNomes = Object.fromEntries(
+  topicos.map(t => [t.id.replace(/^\d+-/, ''), t.data.titulo])
+);
 ---
 
 <Layout title="Exercícios">
 	<div class="page-header">
 		<h1>Prática de Exercícios</h1>
 		<p>Filtre e resolva exercícios com revelação progressiva.</p>
+	</div>
+
+	<div id="topic-filter-banner" class="topic-banner" style="display:none">
+		<span>Tópico: <strong id="banner-text"></strong></span>
+		<a href={`${import.meta.env.BASE_URL}exercicios`} class="btn btn-secondary btn-sm">Mostrar todos</a>
 	</div>
 
 	<div class="filters-container">
@@ -36,19 +47,20 @@ const exercicios = await getCollection('exercicios');
 			<label for="filter-status">Status:</label>
 			<select id="filter-status" class="filter-select">
 				<option value="all">Todos</option>
-				<option value="unverified">Não Verificados (⚠️)</option>
-				<option value="verified">Verificados (✅)</option>
+				<option value="unverified">Não Verificados</option>
+				<option value="verified">Verificados</option>
 			</select>
 		</div>
 	</div>
 
 	<div class="exercises-grid" id="exercises-grid">
 		{exercicios.map((ex) => (
-			<a href={`${import.meta.env.BASE_URL}exercicios/${ex.id}`} 
+			<a href={`${import.meta.env.BASE_URL}exercicios/${ex.id}`}
 			   class="exercise-card"
 			   data-diff={ex.data.dificuldade}
 			   data-origin={ex.data.origem}
-			   data-verified={ex.data.solucao_verificada ? "true" : "false"}>
+			   data-verified={ex.data.solucao_verificada ? "true" : "false"}
+			   data-topicos={ex.data.topicos.join(',')}>
 				<div class="ex-header">
 					<h3>{ex.data.titulo}</h3>
 					{!ex.data.solucao_verificada && <span class="warning-icon" title="Não verificada">⚠️</span>}
@@ -60,51 +72,71 @@ const exercicios = await getCollection('exercicios');
 			</a>
 		))}
 	</div>
+
+	<p id="empty-state" class="empty-state" style="display:none">
+		Nenhum exercício encontrado com esses filtros.
+	</p>
 </Layout>
 
-<script>
+<script define:vars={{ topicoNomes }}>
 	document.addEventListener('DOMContentLoaded', () => {
-		const diffFilter = document.getElementById('filter-diff') as HTMLSelectElement;
-		const originFilter = document.getElementById('filter-origin') as HTMLSelectElement;
-		const statusFilter = document.getElementById('filter-status') as HTMLSelectElement;
-		const cards = document.querySelectorAll('.exercise-card');
+		const diffFilter   = document.getElementById('filter-diff');
+		const originFilter = document.getElementById('filter-origin');
+		const statusFilter = document.getElementById('filter-status');
+		const cards        = document.querySelectorAll('.exercise-card');
+		const emptyState   = document.getElementById('empty-state');
+
+		// Topic filter from URL
+		const urlParams   = new URLSearchParams(window.location.search);
+		const topicoParam = urlParams.get('topico');
+		const topicoSlug  = topicoParam ? topicoParam.replace(/^\d+-/, '') : null;
+
+		if (topicoSlug) {
+			const banner     = document.getElementById('topic-filter-banner');
+			const bannerText = document.getElementById('banner-text');
+			if (banner && bannerText) {
+				banner.style.display = 'flex';
+				bannerText.textContent = topicoNomes[topicoSlug] || topicoSlug.replace(/-/g, ' ');
+			}
+		}
 
 		function filterCards() {
-			const diff = diffFilter.value;
+			const diff   = diffFilter.value;
 			const origin = originFilter.value;
 			const status = statusFilter.value;
+			let visible  = 0;
 
-			cards.forEach((card: any) => {
-				const cDiff = card.dataset.diff;
-				const cOrigin = card.dataset.origin;
+			cards.forEach((card) => {
+				const cDiff     = card.dataset.diff;
+				const cOrigin   = card.dataset.origin;
 				const cVerified = card.dataset.verified;
+				const cTopicos  = (card.dataset.topicos || '').split(',');
 
 				let show = true;
 				if (diff !== 'all' && cDiff !== diff) show = false;
 				if (origin !== 'all' && cOrigin !== origin) show = false;
 				if (status === 'unverified' && cVerified === 'true') show = false;
 				if (status === 'verified' && cVerified === 'false') show = false;
+				if (topicoSlug && !cTopicos.includes(topicoSlug)) show = false;
 
 				card.style.display = show ? 'flex' : 'none';
+				if (show) visible++;
 			});
+
+			if (emptyState) emptyState.style.display = visible === 0 ? 'block' : 'none';
 		}
 
 		diffFilter.addEventListener('change', filterCards);
 		originFilter.addEventListener('change', filterCards);
 		statusFilter.addEventListener('change', filterCards);
-		
-		// Optional: Parse URL params to set initial filters
-		const urlParams = new URLSearchParams(window.location.search);
-		if(urlParams.has('topico')) {
-			// For now, topic filtering isn't implemented in the UI dropdowns,
-			// but we could extend the data attributes and filter logic to support it.
-		}
+
+		filterCards();
 	});
 </script>
 
 <style>
 	.page-header {
-		margin-bottom: var(--space-8);
+		margin-bottom: var(--space-6);
 	}
 
 	.page-header h1 {
@@ -115,6 +147,26 @@ const exercicios = await getCollection('exercicios');
 	.page-header p {
 		font-size: 1.25rem;
 		color: var(--color-text-muted);
+	}
+
+	.topic-banner {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--space-4);
+		background-color: #dbeafe;
+		color: #1e40af;
+		border: 1px solid #93c5fd;
+		padding: var(--space-3) var(--space-4);
+		border-radius: var(--radius-md);
+		margin-bottom: var(--space-4);
+		font-size: 0.95rem;
+	}
+
+	.btn-sm {
+		font-size: 0.85rem;
+		padding: var(--space-1) var(--space-3);
+		white-space: nowrap;
 	}
 
 	.filters-container {
@@ -198,6 +250,13 @@ const exercicios = await getCollection('exercicios');
 
 	.diff-baixa { background-color: #dcfce7; color: #166534; }
 	.diff-media { background-color: #fef08a; color: #854d0e; }
-	.diff-alta { background-color: #fee2e2; color: #991b1b; }
-	.origin { background-color: var(--color-bg); color: var(--color-text-muted); border: 1px solid var(--color-border); }
+	.diff-alta  { background-color: #fee2e2; color: #991b1b; }
+	.origin     { background-color: var(--color-bg); color: var(--color-text-muted); border: 1px solid var(--color-border); }
+
+	.empty-state {
+		text-align: center;
+		color: var(--color-text-muted);
+		padding: var(--space-12);
+		font-size: 1.1rem;
+	}
 </style>
