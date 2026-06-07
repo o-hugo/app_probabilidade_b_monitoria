@@ -1,10 +1,12 @@
 ---
-id: "q14-dantas-cap02"
-titulo: "Questão 14"
-topicos: ["04-distribuicao-normal"]
+id: "dantas-cap02-q14"
+titulo: "Variancia de Soma de Variaveis Aleatorias Dependentes"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["variancia"]
+referencia: "Dantas, Cap. 2, Q. 14"
 ---
 
 ## Enunciado

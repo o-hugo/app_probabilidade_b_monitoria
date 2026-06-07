@@ -1,10 +1,12 @@
 ---
-id: "q05-dantas-cap01"
-titulo: "Questão 5"
-topicos: ["01-variaveis-aleatorias-continuas"]
+id: "dantas-cap01-q05"
+titulo: "Expressoes para Eventos Compostos (A, B, C)"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["probabilidade"]
+referencia: "Dantas, Cap. 1, Q. 5"
 ---
 
 ## Enunciado

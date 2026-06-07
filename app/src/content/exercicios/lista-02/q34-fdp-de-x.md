@@ -1,10 +1,11 @@
 ---
 id: "lista02-q34-fdp-de-x"
 titulo: "FDP de |X|"
-topicos: ["modelos-continuos"]
+topicos: ["funcao-de-variavel-aleatoria", "modelos-continuos"]
 dificuldade: "media"
 origem: "lista-02"
 solucao_verificada: false
+tags: ["metodo-fda"]
 ---
 
 ## Enunciado

@@ -1,10 +1,12 @@
 ---
-id: "q07-dantas-cap01"
-titulo: "Questão 7"
-topicos: ["01-variaveis-aleatorias-continuas"]
+id: "dantas-cap01-q07"
+titulo: "Demonstracao do Teorema Binomial"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["probabilidade"]
+referencia: "Dantas, Cap. 1, Q. 7"
 ---
 
 ## Enunciado

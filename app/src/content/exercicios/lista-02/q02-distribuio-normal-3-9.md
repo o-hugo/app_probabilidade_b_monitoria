@@ -1,10 +1,11 @@
 ---
 id: "lista02-q02-distribuio-normal-3-9"
 titulo: "Distribuição Normal (μ=3, σ²=9)"
-topicos: ["modelos-continuos"]
+topicos: ["distribuicao-normal"]
 dificuldade: "media"
 origem: "lista-02"
 solucao_verificada: false
+tags: ["padronizacao-z"]
 ---
 
 ## Enunciado

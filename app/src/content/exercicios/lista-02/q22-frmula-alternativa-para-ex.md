@@ -1,10 +1,11 @@
 ---
 id: "lista02-q22-frmula-alternativa-para-ex"
 titulo: "Fórmula Alternativa para E[X]"
-topicos: ["modelos-continuos"]
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "lista-02"
 solucao_verificada: false
+tags: ["esperanca"]
 ---
 
 ## Enunciado

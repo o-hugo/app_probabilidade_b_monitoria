@@ -1,10 +1,12 @@
 ---
-id: "q20-dantas-cap02"
-titulo: "Questão 20"
-topicos: ["03-modelos-continuos"]
-dificuldade: "media"
+id: "dantas-cap02-q20"
+titulo: "Funcao Caracteristica e Limitacao por 1"
+topicos: ["02-funcao-geradora-momentos"]
+dificuldade: "alta"
 origem: "livro"
 solucao_verificada: false
+tags: ["fgm"]
+referencia: "Dantas, Cap. 2, Q. 20"
 ---
 
 ## Enunciado

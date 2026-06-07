@@ -1,10 +1,12 @@
 ---
-id: "q38-dantas-cap02"
-titulo: "Questão 38"
-topicos: ["03-modelos-continuos"]
+id: "dantas-cap02-q38"
+titulo: "Numero Esperado de Dias com Exatamente k Aniversarios"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "alta"
 origem: "livro"
 solucao_verificada: false
+tags: ["esperanca"]
+referencia: "Dantas, Cap. 2, Q. 38"
 ---
 
 ## Enunciado

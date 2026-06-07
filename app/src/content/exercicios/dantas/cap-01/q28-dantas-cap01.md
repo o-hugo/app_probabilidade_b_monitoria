@@ -1,10 +1,12 @@
 ---
-id: "q28-dantas-cap01"
-titulo: "Questão 28"
-topicos: ["01-variaveis-aleatorias-continuas"]
+id: "dantas-cap01-q28"
+titulo: "Probabilidade em Extracao de Cartas do Baralho"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["probabilidade"]
+referencia: "Dantas, Cap. 1, Q. 28"
 ---
 
 ## Enunciado

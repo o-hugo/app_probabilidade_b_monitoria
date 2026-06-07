@@ -1,10 +1,12 @@
 ---
-id: "q41-dantas-cap01"
-titulo: "Questão 41"
-topicos: ["01-variaveis-aleatorias-continuas"]
+id: "dantas-cap01-q41"
+titulo: "Distribuicao de Bolas Indistinguiveis em Urnas"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "alta"
 origem: "livro"
 solucao_verificada: false
+tags: ["probabilidade"]
+referencia: "Dantas, Cap. 1, Q. 41"
 ---
 
 ## Enunciado

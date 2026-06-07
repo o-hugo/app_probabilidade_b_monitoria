@@ -1,10 +1,12 @@
 ---
-id: "q06-dantas-cap02"
-titulo: "Questão 6"
-topicos: ["03-modelos-continuos"]
+id: "dantas-cap02-q06"
+titulo: "Distribuicao Exponencial: FDP e Probabilidades"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["fdp-valida", "probabilidade"]
+referencia: "Dantas, Cap. 2, Q. 6"
 ---
 
 ## Enunciado

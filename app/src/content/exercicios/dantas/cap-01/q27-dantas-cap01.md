@@ -1,10 +1,12 @@
 ---
-id: "q27-dantas-cap01"
-titulo: "Questão 27"
-topicos: ["01-variaveis-aleatorias-continuas"]
+id: "dantas-cap01-q27"
+titulo: "Probabilidade de Quina na Loto"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["probabilidade"]
+referencia: "Dantas, Cap. 1, Q. 27"
 ---
 
 ## Enunciado

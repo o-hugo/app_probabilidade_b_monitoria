@@ -1,10 +1,11 @@
 ---
 id: "lista02-q38-distribuio-de-x"
 titulo: "Distribuição de X²"
-topicos: ["modelos-continuos"]
+topicos: ["funcao-de-variavel-aleatoria"]
 dificuldade: "media"
 origem: "lista-02"
 solucao_verificada: false
+tags: ["metodo-fda"]
 ---
 
 ## Enunciado

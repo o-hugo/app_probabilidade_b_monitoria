@@ -5,6 +5,7 @@ topicos: ["modelos-continuos"]
 dificuldade: "media"
 origem: "lista-02"
 solucao_verificada: false
+tags: ["probabilidade", "fda"]
 ---
 
 ## Enunciado

@@ -1,10 +1,12 @@
 ---
-id: "q19-dantas-cap01"
-titulo: "Questão 19"
-topicos: ["01-variaveis-aleatorias-continuas"]
+id: "dantas-cap01-q19"
+titulo: "Eventos em Sorteio de Inteiros de 1 a 20"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["probabilidade"]
+referencia: "Dantas, Cap. 1, Q. 19"
 ---
 
 ## Enunciado

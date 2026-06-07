@@ -1,10 +1,12 @@
 ---
-id: "q27-dantas-cap02"
-titulo: "Questão 27"
-topicos: ["03-modelos-continuos"]
+id: "dantas-cap02-q27"
+titulo: "Distribuicao do Tamanho de Subconjunto Aleatorio"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "alta"
 origem: "livro"
 solucao_verificada: false
+tags: ["fda", "esperanca", "variancia"]
+referencia: "Dantas, Cap. 2, Q. 27"
 ---
 
 ## Enunciado

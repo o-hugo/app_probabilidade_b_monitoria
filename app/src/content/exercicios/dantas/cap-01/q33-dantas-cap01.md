@@ -1,10 +1,12 @@
 ---
-id: "q33-dantas-cap01"
-titulo: "Questão 33"
-topicos: ["01-variaveis-aleatorias-continuas"]
+id: "dantas-cap01-q33"
+titulo: "Probabilidade de Falha de Dispositivo Eletronico"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["probabilidade"]
+referencia: "Dantas, Cap. 1, Q. 33"
 ---
 
 ## Enunciado

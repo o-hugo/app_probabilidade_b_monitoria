@@ -1,10 +1,11 @@
 ---
 id: "questoes-q01-lista-questo-1"
 titulo: "Questão 1"
-topicos: ["modelos-continuos"]
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "lista"
 solucao_verificada: false
+tags: ["probabilidade", "condicional", "fda"]
 ---
 
 ## Enunciado

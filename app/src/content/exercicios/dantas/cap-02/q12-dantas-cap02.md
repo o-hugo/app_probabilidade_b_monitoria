@@ -1,10 +1,12 @@
 ---
-id: "q12-dantas-cap02"
-titulo: "Questão 12"
-topicos: ["03-modelos-continuos","05-funcao-de-variavel-aleatoria"]
+id: "dantas-cap02-q12"
+titulo: "Propriedades da Variancia e Transformacoes Lineares"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["variancia"]
+referencia: "Dantas, Cap. 2, Q. 12"
 ---
 
 ## Enunciado

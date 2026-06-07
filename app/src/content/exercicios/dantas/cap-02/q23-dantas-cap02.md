@@ -1,10 +1,12 @@
 ---
-id: "q23-dantas-cap02"
-titulo: "Questão 23"
-topicos: ["03-modelos-continuos"]
+id: "dantas-cap02-q23"
+titulo: "FDA Mista: Continuidade e Probabilidades"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "alta"
 origem: "livro"
 solucao_verificada: false
+tags: ["fda", "probabilidade"]
+referencia: "Dantas, Cap. 2, Q. 23"
 ---
 
 ## Enunciado

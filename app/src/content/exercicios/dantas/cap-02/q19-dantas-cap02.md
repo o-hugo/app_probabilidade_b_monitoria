@@ -1,10 +1,12 @@
 ---
-id: "q19-dantas-cap02"
-titulo: "Questão 19"
-topicos: ["03-modelos-continuos","02-funcao-geradora-momentos"]
+id: "dantas-cap02-q19"
+titulo: "FGM, Funcao Geradora de Probabilidade e Funcao Caracteristica"
+topicos: ["02-funcao-geradora-momentos"]
 dificuldade: "alta"
 origem: "livro"
 solucao_verificada: false
+tags: ["fgm"]
+referencia: "Dantas, Cap. 2, Q. 19"
 ---
 
 ## Enunciado

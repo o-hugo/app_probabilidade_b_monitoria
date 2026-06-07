@@ -1,10 +1,12 @@
 ---
-id: "q07-dantas-cap02"
-titulo: "Questão 7"
-topicos: ["03-modelos-continuos"]
+id: "dantas-cap02-q07"
+titulo: "Distribuicao Triangular: FDP e Probabilidades"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["fdp-valida", "probabilidade"]
+referencia: "Dantas, Cap. 2, Q. 7"
 ---
 
 ## Enunciado

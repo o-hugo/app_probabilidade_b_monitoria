@@ -1,10 +1,12 @@
 ---
-id: "q34-dantas-cap02"
-titulo: "Questão 34"
-topicos: ["03-modelos-continuos"]
+id: "dantas-cap02-q34"
+titulo: "Esperanca do Comprimento do Maior Pedaco de Palito"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["esperanca"]
+referencia: "Dantas, Cap. 2, Q. 34"
 ---
 
 ## Enunciado

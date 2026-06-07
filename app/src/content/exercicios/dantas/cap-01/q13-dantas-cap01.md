@@ -1,10 +1,12 @@
 ---
-id: "q13-dantas-cap01"
-titulo: "Questão 13"
-topicos: ["01-variaveis-aleatorias-continuas"]
+id: "dantas-cap01-q13"
+titulo: "Independencia Preservada em Complementares"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["probabilidade"]
+referencia: "Dantas, Cap. 1, Q. 13"
 ---
 
 ## Enunciado

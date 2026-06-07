@@ -1,10 +1,12 @@
 ---
-id: "q11-dantas-cap02"
-titulo: "Questão 11"
-topicos: ["03-modelos-continuos"]
+id: "dantas-cap02-q11"
+titulo: "Propriedades da Esperanca Matematica"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["esperanca"]
+referencia: "Dantas, Cap. 2, Q. 11"
 ---
 
 ## Enunciado

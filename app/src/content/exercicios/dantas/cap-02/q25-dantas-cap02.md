@@ -1,10 +1,12 @@
 ---
-id: "q25-dantas-cap02"
-titulo: "Questão 25"
-topicos: ["03-modelos-continuos"]
+id: "dantas-cap02-q25"
+titulo: "Combinacoes Convexas de Funcoes Densidade"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["fdp-valida"]
+referencia: "Dantas, Cap. 2, Q. 25"
 ---
 
 ## Enunciado

@@ -1,10 +1,12 @@
 ---
-id: "q12-dantas-cap01"
-titulo: "Questão 12"
-topicos: ["01-variaveis-aleatorias-continuas"]
+id: "dantas-cap01-q12"
+titulo: "Eventos Independentes Dois a Dois com Intersecao Vazia"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "alta"
 origem: "livro"
 solucao_verificada: false
+tags: ["probabilidade"]
+referencia: "Dantas, Cap. 1, Q. 12"
 ---
 
 ## Enunciado

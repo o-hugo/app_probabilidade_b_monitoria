@@ -5,6 +5,8 @@ topicos: ["modelos-continuos"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["confiabilidade", "esperanca"]
+referencia: "Dantas, Ex. 2.4.4"
 ---
 
 ## Enunciado

@@ -1,10 +1,12 @@
 ---
-id: "q40-dantas-cap02"
-titulo: "Questão 40"
-topicos: ["03-modelos-continuos"]
+id: "dantas-cap02-q40"
+titulo: "Nivel de Estoque Otimo para Maximizar Lucro Esperado"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "alta"
 origem: "livro"
 solucao_verificada: false
+tags: ["esperanca"]
+referencia: "Dantas, Cap. 2, Q. 40"
 ---
 
 ## Enunciado

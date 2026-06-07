@@ -1,10 +1,12 @@
 ---
-id: "q10-dantas-cap01"
-titulo: "Questão 10"
-topicos: ["01-variaveis-aleatorias-continuas"]
+id: "dantas-cap01-q10"
+titulo: "Probabilidade da Diferenca Simetrica"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["probabilidade"]
+referencia: "Dantas, Cap. 1, Q. 10"
 ---
 
 ## Enunciado

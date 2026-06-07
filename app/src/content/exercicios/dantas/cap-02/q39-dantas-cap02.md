@@ -1,10 +1,12 @@
 ---
-id: "q39-dantas-cap02"
-titulo: "Questão 39"
-topicos: ["03-modelos-continuos"]
+id: "dantas-cap02-q39"
+titulo: "Media e Variancia do Numero de Tentativas com Chaves"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["esperanca", "variancia"]
+referencia: "Dantas, Cap. 2, Q. 39"
 ---
 
 ## Enunciado

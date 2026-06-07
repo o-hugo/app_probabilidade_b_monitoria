@@ -1,14 +1,13 @@
 ---
-id: "q22-dantas-cap01"
-titulo: "Questão 22"
-topicos: ["01-variaveis-aleatorias-continuas"]
+id: "dantas-cap01-q22"
+titulo: "Selecao de Membros de Comite sem Reposicao"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["condicional"]
+referencia: "Dantas, Cap. 1, Q. 22"
 ---
-
-> [!NOTE]
-> A questão 21 não existe na numeração original do livro, pulando direto da 20 para a 22.
 
 ## Enunciado
 Um comitê é formado por quatro homens e duas mulheres. Dois membros do comitê são selecionados sucessivamente, ao acaso e sem reposição. Calcule a probabilidade de cada um dos resultados: HH, HM, MH e MM.

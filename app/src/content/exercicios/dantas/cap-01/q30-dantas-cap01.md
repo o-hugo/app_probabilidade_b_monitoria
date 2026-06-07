@@ -1,10 +1,12 @@
 ---
-id: "q30-dantas-cap01"
-titulo: "Questão 30"
-topicos: ["01-variaveis-aleatorias-continuas"]
-dificuldade: "media"
+id: "dantas-cap01-q30"
+titulo: "Distribuicao de Jornalistas em Funcoes"
+topicos: ["variaveis-aleatorias-continuas"]
+dificuldade: "baixa"
 origem: "livro"
 solucao_verificada: false
+tags: ["probabilidade"]
+referencia: "Dantas, Cap. 1, Q. 30"
 ---
 
 ## Enunciado

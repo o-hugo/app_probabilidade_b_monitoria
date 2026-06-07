@@ -1,10 +1,12 @@
 ---
-id: "q08-dantas-cap01"
-titulo: "Questão 8"
-topicos: ["01-variaveis-aleatorias-continuas"]
+id: "dantas-cap01-q08"
+titulo: "Identidades de Somatorios com Coeficientes Binomiais"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "alta"
 origem: "livro"
 solucao_verificada: false
+tags: ["probabilidade"]
+referencia: "Dantas, Cap. 1, Q. 8"
 ---
 
 ## Enunciado

@@ -1,10 +1,12 @@
 ---
-id: "q28-dantas-cap02"
-titulo: "Questão 28"
-topicos: ["04-distribuicao-normal"]
-dificuldade: "media"
+id: "dantas-cap02-q28"
+titulo: "Distribuicao Zeta de Riemann"
+topicos: ["variaveis-aleatorias-continuas"]
+dificuldade: "alta"
 origem: "livro"
 solucao_verificada: false
+tags: ["probabilidade", "fda"]
+referencia: "Dantas, Cap. 2, Q. 28"
 ---
 
 ## Enunciado

@@ -1,10 +1,11 @@
 ---
 id: "questoes-q02-lista-questo-2"
 titulo: "Questão 2"
-topicos: ["modelos-continuos"]
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "lista"
 solucao_verificada: false
+tags: ["probabilidade", "fda"]
 ---
 
 ## Enunciado

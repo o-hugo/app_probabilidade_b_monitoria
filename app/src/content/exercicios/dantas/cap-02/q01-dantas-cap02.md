@@ -1,10 +1,12 @@
 ---
-id: "q01-dantas-cap02"
-titulo: "Questão 1"
-topicos: ["03-modelos-continuos"]
+id: "dantas-cap02-q01"
+titulo: "Distribuicao de Probabilidade Discreta Empirica"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "baixa"
 origem: "livro"
 solucao_verificada: false
+tags: ["probabilidade", "esperanca", "variancia"]
+referencia: "Dantas, Cap. 2, Q. 1"
 ---
 
 ## Enunciado

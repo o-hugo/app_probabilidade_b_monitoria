@@ -1,10 +1,12 @@
 ---
-id: "q15-dantas-cap01"
-titulo: "Questão 15"
-topicos: ["01-variaveis-aleatorias-continuas"]
-dificuldade: "media"
+id: "dantas-cap01-q15"
+titulo: "Desigualdade de Bonferroni e Monotonicidade Condicional"
+topicos: ["variaveis-aleatorias-continuas"]
+dificuldade: "alta"
 origem: "livro"
 solucao_verificada: false
+tags: ["condicional"]
+referencia: "Dantas, Cap. 1, Q. 15"
 ---
 
 ## Enunciado

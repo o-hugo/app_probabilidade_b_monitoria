@@ -1,10 +1,11 @@
 ---
 id: "questoes-q07-lista-questo-7"
 titulo: "Questão 7"
-topicos: ["modelos-continuos"]
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "lista"
 solucao_verificada: false
+tags: ["fdp-valida", "fda", "condicional"]
 ---
 
 ## Enunciado

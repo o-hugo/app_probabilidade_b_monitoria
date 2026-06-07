@@ -1,10 +1,12 @@
 ---
-id: "q36-dantas-cap02"
-titulo: "Questão 36"
-topicos: ["03-modelos-continuos","05-funcao-de-variavel-aleatoria"]
+id: "dantas-cap02-q36"
+titulo: "FDA de Y = max(X, c) para FDP Generica"
+topicos: ["05-funcao-de-variavel-aleatoria"]
 dificuldade: "alta"
 origem: "livro"
 solucao_verificada: false
+tags: ["fda", "metodo-fda"]
+referencia: "Dantas, Cap. 2, Q. 36"
 ---
 
 ## Enunciado

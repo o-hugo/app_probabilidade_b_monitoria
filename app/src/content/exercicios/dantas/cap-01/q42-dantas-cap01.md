@@ -1,10 +1,12 @@
 ---
-id: "q42-dantas-cap01"
-titulo: "Questão 42"
-topicos: ["01-variaveis-aleatorias-continuas"]
+id: "dantas-cap01-q42"
+titulo: "Problema dos Encontros (Derangements)"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "alta"
 origem: "livro"
 solucao_verificada: false
+tags: ["probabilidade"]
+referencia: "Dantas, Cap. 1, Q. 42"
 ---
 
 ## Enunciado

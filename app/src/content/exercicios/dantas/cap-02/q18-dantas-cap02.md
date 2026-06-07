@@ -1,10 +1,12 @@
 ---
-id: "q18-dantas-cap02"
-titulo: "Questão 18"
-topicos: ["03-modelos-continuos","02-funcao-geradora-momentos"]
+id: "dantas-cap02-q18"
+titulo: "FGM de Variaveis Aleatorias Discretas"
+topicos: ["02-funcao-geradora-momentos"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["fgm"]
+referencia: "Dantas, Cap. 2, Q. 18"
 ---
 
 ## Enunciado

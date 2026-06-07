@@ -1,10 +1,12 @@
 ---
-id: "q09-dantas-cap01"
-titulo: "Questão 9"
-topicos: ["01-variaveis-aleatorias-continuas"]
+id: "dantas-cap01-q09"
+titulo: "Calculo de P(A cap B cap C) via Probabilidade Condicional"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["condicional"]
+referencia: "Dantas, Cap. 1, Q. 9"
 ---
 
 ## Enunciado

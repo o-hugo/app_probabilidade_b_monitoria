@@ -1,10 +1,11 @@
 ---
 id: "questoes-q17-slide-questo-17"
 titulo: "Questão 17"
-topicos: ["modelos-continuos"]
+topicos: ["funcao-de-variavel-aleatoria", "modelos-continuos"]
 dificuldade: "media"
 origem: "slide"
 solucao_verificada: false
+tags: ["metodo-fda"]
 ---
 
 ## Enunciado

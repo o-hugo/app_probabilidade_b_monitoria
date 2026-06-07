@@ -1,10 +1,12 @@
 ---
-id: "q33-dantas-cap02"
-titulo: "Questão 33"
-topicos: ["03-modelos-continuos"]
+id: "dantas-cap02-q33"
+titulo: "FDP da Distancia em Triangulo Aleatorio"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["fdp-valida"]
+referencia: "Dantas, Cap. 2, Q. 33"
 ---
 
 ## Enunciado

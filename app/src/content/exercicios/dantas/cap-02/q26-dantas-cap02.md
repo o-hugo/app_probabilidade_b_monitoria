@@ -1,10 +1,12 @@
 ---
-id: "q26-dantas-cap02"
-titulo: "Questão 26"
-topicos: ["03-modelos-continuos"]
-dificuldade: "media"
+id: "dantas-cap02-q26"
+titulo: "FDA do Maximo em Amostragem sem Reposicao"
+topicos: ["variaveis-aleatorias-continuas"]
+dificuldade: "alta"
 origem: "livro"
 solucao_verificada: false
+tags: ["fda"]
+referencia: "Dantas, Cap. 2, Q. 26"
 ---
 
 ## Enunciado

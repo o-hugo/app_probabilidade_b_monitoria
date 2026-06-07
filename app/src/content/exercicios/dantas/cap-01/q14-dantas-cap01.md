@@ -1,10 +1,12 @@
 ---
-id: "q14-dantas-cap01"
-titulo: "Questão 14"
-topicos: ["01-variaveis-aleatorias-continuas"]
+id: "dantas-cap01-q14"
+titulo: "Exclusividade Mutua vs. Independencia"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["condicional"]
+referencia: "Dantas, Cap. 1, Q. 14"
 ---
 
 ## Enunciado

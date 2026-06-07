@@ -1,10 +1,12 @@
 ---
-id: "q13-dantas-cap02"
-titulo: "Questão 13"
-topicos: ["03-modelos-continuos"]
+id: "dantas-cap02-q13"
+titulo: "Minimizacao de E[(X-a)^2] e Interpretacao como Variancia"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["esperanca", "variancia"]
+referencia: "Dantas, Cap. 2, Q. 13"
 ---
 
 ## Enunciado

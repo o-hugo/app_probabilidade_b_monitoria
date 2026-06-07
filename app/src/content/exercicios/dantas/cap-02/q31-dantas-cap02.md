@@ -1,10 +1,12 @@
 ---
-id: "q31-dantas-cap02"
-titulo: "Questão 31"
-topicos: ["03-modelos-continuos"]
+id: "dantas-cap02-q31"
+titulo: "Problema do Aniversario: Distribuicao e Esperanca"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "alta"
 origem: "livro"
 solucao_verificada: false
+tags: ["fda", "esperanca"]
+referencia: "Dantas, Cap. 2, Q. 31"
 ---
 
 ## Enunciado

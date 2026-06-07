@@ -1,10 +1,12 @@
 ---
-id: "q20-dantas-cap01"
-titulo: "Questão 20"
-topicos: ["01-variaveis-aleatorias-continuas"]
+id: "dantas-cap01-q20"
+titulo: "Probabilidade em Espacos Equiprovaveis"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["probabilidade"]
+referencia: "Dantas, Cap. 1, Q. 20"
 ---
 
 ## Enunciado
