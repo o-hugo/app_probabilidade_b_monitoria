@@ -20,10 +20,12 @@ const exercicios = defineCollection({
     titulo: z.string(),
     topicos: z.array(z.string()),
     dificuldade: z.enum(['baixa', 'media', 'alta']),
-    origem: z.enum(['lista', 'lista-02', 'prova-3', 'slide', 'slides', 'livro', 'aula']),
+    origem: z.enum(['lista', 'lista-02', 'prova-3', 'slide', 'slides', 'livro', 'aula']).optional(),
     metodo: z.string().optional(),
     resposta_final: z.string().optional(),
     solucao_verificada: z.boolean().default(false),
+    tags: z.array(z.string()).default([]),
+    referencia: z.string().optional(),
   }),
 });
 

@@ -5,6 +5,7 @@ topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "lista-02"
 solucao_verificada: false
+tags: ["fdp-valida"]
 ---
 
 ## Enunciado

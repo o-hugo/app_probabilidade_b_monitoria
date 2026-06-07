@@ -5,6 +5,7 @@ topicos: ["funcao-de-variavel-aleatoria"]
 dificuldade: "media"
 origem: "lista-02"
 solucao_verificada: false
+tags: ["metodo-fda"]
 ---
 
 ## Enunciado

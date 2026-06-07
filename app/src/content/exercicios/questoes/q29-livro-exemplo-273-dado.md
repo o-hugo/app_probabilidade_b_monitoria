@@ -5,6 +5,8 @@ topicos: ["funcao-de-variavel-aleatoria"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["variancia", "metodo-fda"]
+referencia: "Dantas, Ex. 2.7.3"
 ---
 
 ## Enunciado

@@ -5,6 +5,8 @@ topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["fda"]
+referencia: "Dantas, Ex. 2.4.3"
 ---
 
 ## Enunciado

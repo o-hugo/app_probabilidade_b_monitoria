@@ -5,6 +5,7 @@ topicos: ["funcao-de-variavel-aleatoria", "modelos-continuos"]
 dificuldade: "media"
 origem: "slide"
 solucao_verificada: false
+tags: ["metodo-jacobiano"]
 ---
 
 ## Enunciado

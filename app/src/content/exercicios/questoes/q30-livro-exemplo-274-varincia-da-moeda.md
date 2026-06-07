@@ -5,6 +5,8 @@ topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["variancia"]
+referencia: "Dantas, Ex. 2.7.4"
 ---
 
 ## Enunciado

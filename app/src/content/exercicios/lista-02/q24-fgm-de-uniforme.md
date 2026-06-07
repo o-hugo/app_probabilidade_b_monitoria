@@ -5,6 +5,7 @@ topicos: ["funcao-geradora-momentos", "modelos-continuos"]
 dificuldade: "media"
 origem: "lista-02"
 solucao_verificada: false
+tags: ["fgm"]
 ---
 
 ## Enunciado

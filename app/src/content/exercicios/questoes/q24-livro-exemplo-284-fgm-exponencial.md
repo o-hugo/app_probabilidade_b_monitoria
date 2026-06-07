@@ -5,6 +5,8 @@ topicos: ["modelos-continuos", "funcao-geradora-momentos"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["fgm"]
+referencia: "Dantas, Ex. 2.8.4"
 ---
 
 ## Enunciado

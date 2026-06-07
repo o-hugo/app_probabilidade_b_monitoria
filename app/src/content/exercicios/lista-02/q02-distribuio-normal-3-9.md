@@ -5,6 +5,7 @@ topicos: ["distribuicao-normal"]
 dificuldade: "media"
 origem: "lista-02"
 solucao_verificada: false
+tags: ["padronizacao-z"]
 ---
 
 ## Enunciado

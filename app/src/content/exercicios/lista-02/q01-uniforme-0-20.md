@@ -6,6 +6,7 @@ dificuldade: "baixa"
 origem: "lista-02"
 metodo: "integral-direta"
 solucao_verificada: true
+tags: ["probabilidade"]
 ---
 
 ## Enunciado

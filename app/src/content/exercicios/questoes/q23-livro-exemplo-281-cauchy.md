@@ -5,6 +5,8 @@ topicos: ["modelos-continuos"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["esperanca"]
+referencia: "Dantas, Ex. 2.8.1"
 ---
 
 ## Enunciado
