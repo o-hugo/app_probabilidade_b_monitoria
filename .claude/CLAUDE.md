@@ -337,6 +337,28 @@ funcionam normalmente. O prefixo so e aplicado no build de producao.
 
 ---
 
+## IDs de Topicos: Prefixo Numerico
+
+Os IDs dos topicos no Astro Content Collections tem o prefixo do nome do arquivo:
+
+| Arquivo | `topico.id` (usado em links) | ID sem prefixo (chave de busca) |
+|---------|------------------------------|----------------------------------|
+| `01-variaveis-aleatorias-continuas.md` | `01-variaveis-aleatorias-continuas` | `variaveis-aleatorias-continuas` |
+| `02-funcao-geradora-momentos.md` | `02-funcao-geradora-momentos` | `funcao-geradora-momentos` |
+| `03-modelos-continuos.md` | `03-modelos-continuos` | `modelos-continuos` |
+
+**Regra de consistencia nos exercicios:**
+O campo `topicos` nos exercicios pode usar tanto o ID com prefixo (`"02-funcao-geradora-momentos"`)
+quanto sem (`"variaveis-aleatorias-continuas"`). O filtro da pagina de exercicios normaliza ambos
+via `replace(/^\d+-/, '')` antes de comparar — portanto ambas as formas funcionam.
+
+**Nao use a forma sem prefixo para topicos 2-6**, pois seria inconsistente com os IDs reais.
+Use sempre o ID exato do arquivo:
+- `"variaveis-aleatorias-continuas"` (topico 1 nao tem prefixo no frontmatter original)
+- `"02-funcao-geradora-momentos"`, `"03-modelos-continuos"`, etc.
+
+---
+
 ## Problemas Conhecidos e Solucoes
 
 | Problema | Causa | Solucao |
@@ -345,3 +367,5 @@ funcionam normalmente. O prefixo so e aplicado no build de producao.
 | Build falha com erro de schema | Campo no frontmatter nao declarado em `content.config.ts` | Adicionar campo ao schema Zod |
 | Deploy sobrescreve com site vazio | Workflow `static.yml` gerado pelo GitHub conflita com o nosso | Deletar `static.yml` do repositorio |
 | Push falha por autenticacao | Terminal nao tem credenciais do GitHub Desktop | Usar `gh auth token` ou GitHub Desktop |
+| Filtros de exercicios nao funcionam | Declaracao duplicada de `const` no script client-side gera SyntaxError | Nunca redeclarar variaveis com `const`/`let` no mesmo escopo em `<script>` |
+| Filtro por topico mostra todos | Mismatch entre slug da URL (sem prefixo) e `data-topicos` do card (com prefixo) | O script normaliza via `.map(t => t.replace(/^\d+-/, ''))` — manter esse padrao |
