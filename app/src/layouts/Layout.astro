@@ -14,7 +14,7 @@ const { title } = Astro.props;
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content="Ambiente de Aprendizagem Interativo para Probabilidade B" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title} | Probabilidade B</title>
@@ -26,14 +26,26 @@ const { title } = Astro.props;
 		<header class="app-header">
 			<div class="container">
 				<a href={import.meta.env.BASE_URL} class="logo">Probabilidade B</a>
-				<nav class="main-nav">
+				<button class="nav-toggle" aria-label="Abrir menu" aria-expanded="false">
+					<span></span><span></span><span></span>
+				</button>
+				<nav class="main-nav" id="main-nav">
 					<a href={`${import.meta.env.BASE_URL}topicos`}>Tópicos</a>
 					<a href={`${import.meta.env.BASE_URL}exercicios`}>Exercícios</a>
 					<a href={`${import.meta.env.BASE_URL}laboratorio`}>Laboratório</a>
+					<a href={`${import.meta.env.BASE_URL}tabela-distribuicoes`}>Tabela</a>
 					<a href={`${import.meta.env.BASE_URL}revisao-diaria`}>Revisão Diária</a>
 				</nav>
 			</div>
 		</header>
+		<script>
+			const toggle = document.querySelector('.nav-toggle');
+			const nav    = document.getElementById('main-nav');
+			toggle?.addEventListener('click', () => {
+				const open = nav?.classList.toggle('open');
+				toggle.setAttribute('aria-expanded', String(open));
+			});
+		</script>
 		<main class="container main-content">
 			<slot />
 		</main>
@@ -59,6 +71,7 @@ const { title } = Astro.props;
 		justify-content: space-between;
 		align-items: center;
 		height: 4rem;
+		flex-wrap: wrap;
 	}
 
 	.logo {
@@ -70,6 +83,37 @@ const { title } = Astro.props;
 	.logo:hover {
 		text-decoration: none;
 		color: var(--color-primary);
+	}
+
+	/* Hamburger button — oculto no desktop */
+	.nav-toggle {
+		display: none;
+		flex-direction: column;
+		justify-content: center;
+		gap: 5px;
+		background: none;
+		border: none;
+		cursor: pointer;
+		padding: var(--space-2);
+	}
+
+	.nav-toggle span {
+		display: block;
+		width: 22px;
+		height: 2px;
+		background-color: var(--color-text);
+		border-radius: 2px;
+		transition: transform 0.2s, opacity 0.2s;
+	}
+
+	.nav-toggle[aria-expanded="true"] span:nth-child(1) {
+		transform: translateY(7px) rotate(45deg);
+	}
+	.nav-toggle[aria-expanded="true"] span:nth-child(2) {
+		opacity: 0;
+	}
+	.nav-toggle[aria-expanded="true"] span:nth-child(3) {
+		transform: translateY(-7px) rotate(-45deg);
 	}
 
 	.main-nav {
@@ -97,7 +141,7 @@ const { title } = Astro.props;
 	.main-content {
 		padding-top: var(--space-8);
 		padding-bottom: var(--space-12);
-		min-height: calc(100vh - 4rem - 4rem); /* Viewport - header - footer */
+		min-height: calc(100vh - 4rem - 4rem);
 	}
 
 	.app-footer {
@@ -107,5 +151,44 @@ const { title } = Astro.props;
 		text-align: center;
 		color: var(--color-text-muted);
 		font-size: 0.875rem;
+	}
+
+	@media (max-width: 640px) {
+		.nav-toggle {
+			display: flex;
+		}
+
+		.main-nav {
+			display: none;
+			width: 100%;
+			flex-direction: column;
+			gap: 0;
+			border-top: 1px solid var(--color-border);
+			padding: var(--space-2) 0;
+		}
+
+		.main-nav.open {
+			display: flex;
+		}
+
+		.main-nav a {
+			padding: var(--space-3) 0;
+			border-bottom: 1px solid var(--color-border);
+			font-size: 1rem;
+		}
+
+		.main-nav a:last-child {
+			border-bottom: none;
+		}
+
+		.app-header .container {
+			height: auto;
+			padding-top: var(--space-3);
+			padding-bottom: var(--space-3);
+		}
+
+		.main-content {
+			padding-top: var(--space-6);
+		}
 	}
 </style>
