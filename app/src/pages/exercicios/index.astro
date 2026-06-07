@@ -139,9 +139,6 @@ const tagLabels: Record<string, string> = {
 			}
 		}
 
-		const urlParams = new URLSearchParams(window.location.search);
-		const topicoParam = urlParams.get('topico');
-
 		function filterCards() {
 			const diff     = diffFilter.value;
 			const tag      = tagsFilter.value;
@@ -151,7 +148,8 @@ const tagLabels: Record<string, string> = {
 			cards.forEach((card) => {
 				const cDiff     = card.dataset.diff;
 				const cVerified = card.dataset.verified;
-				const cTopicos  = (card.dataset.topicos || '').split(',');
+				// normaliza prefixos numericos para comparacao uniforme (ex: "02-fgm" -> "fgm")
+				const cTopicos  = (card.dataset.topicos || '').split(',').map(t => t.replace(/^\d+-/, ''));
 				const cTags     = (card.dataset.tags    || '').split(',');
 
 				let show = true;
