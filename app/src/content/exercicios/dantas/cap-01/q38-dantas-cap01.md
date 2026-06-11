@@ -1,10 +1,12 @@
 ---
-id: "q38-dantas-cap01"
-titulo: "Questão 38"
-topicos: ["01-variaveis-aleatorias-continuas"]
+id: "dantas-cap01-q38"
+titulo: "Distribuicao de Bolas em Urnas Numeradas"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "alta"
 origem: "livro"
 solucao_verificada: false
+tags: ["probabilidade"]
+referencia: "Dantas, Cap. 1, Q. 38"
 ---
 
 ## Enunciado

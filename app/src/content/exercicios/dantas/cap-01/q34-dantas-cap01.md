@@ -1,10 +1,12 @@
 ---
-id: "q34-dantas-cap01"
-titulo: "Questão 34"
-topicos: ["01-variaveis-aleatorias-continuas"]
+id: "dantas-cap01-q34"
+titulo: "Bayes: Peca Defeituosa por Maquina"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["condicional"]
+referencia: "Dantas, Cap. 1, Q. 34"
 ---
 
 ## Enunciado

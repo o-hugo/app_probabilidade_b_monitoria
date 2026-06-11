@@ -1,10 +1,12 @@
 ---
-id: "q39-dantas-cap01"
-titulo: "Questão 39"
-topicos: ["01-variaveis-aleatorias-continuas"]
+id: "dantas-cap01-q39"
+titulo: "Probabilidade de Inclusao em Amostragem"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["probabilidade"]
+referencia: "Dantas, Cap. 1, Q. 39"
 ---
 
 ## Enunciado

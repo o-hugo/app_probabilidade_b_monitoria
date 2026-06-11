@@ -1,10 +1,12 @@
 ---
-id: "q16-dantas-cap01"
-titulo: "Questão 16"
-topicos: ["01-variaveis-aleatorias-continuas"]
+id: "dantas-cap01-q16"
+titulo: "De Morgan e Complementar da Uniao"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["probabilidade"]
+referencia: "Dantas, Cap. 1, Q. 16"
 ---
 
 ## Enunciado

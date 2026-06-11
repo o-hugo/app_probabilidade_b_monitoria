@@ -1,14 +1,13 @@
 ---
-id: "q02-dantas-cap01"
-titulo: "Questão 2"
-topicos: ["01-variaveis-aleatorias-continuas"]
+id: "dantas-cap01-q02"
+titulo: "Operacoes com Eventos em Lancamento de Moeda"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["probabilidade"]
+referencia: "Dantas, Cap. 1, Q. 2"
 ---
-
-> [!NOTE]
-> A numeração desta questão (2) foi inferida pela sua sequência no livro original.
 
 ## Enunciado
 Uma moeda é lançada três vezes. Descreva o espaço amostral.

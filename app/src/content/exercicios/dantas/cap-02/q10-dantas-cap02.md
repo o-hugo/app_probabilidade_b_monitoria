@@ -1,10 +1,12 @@
 ---
-id: "q10-dantas-cap02"
-titulo: "Questão 10"
-topicos: ["03-modelos-continuos","05-funcao-de-variavel-aleatoria"]
+id: "dantas-cap02-q10"
+titulo: "Linearidade da Esperanca: Prova e Generalizacao"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "alta"
 origem: "livro"
 solucao_verificada: false
+tags: ["esperanca"]
+referencia: "Dantas, Cap. 2, Q. 10"
 ---
 
 ## Enunciado

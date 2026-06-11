@@ -1,10 +1,12 @@
 ---
-id: "q24-dantas-cap02"
-titulo: "Questão 24"
-topicos: ["03-modelos-continuos"]
+id: "dantas-cap02-q24"
+titulo: "Propriedades da FDA com Definicoes Alternativas"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["fda"]
+referencia: "Dantas, Cap. 2, Q. 24"
 ---
 
 ## Enunciado

@@ -1,10 +1,12 @@
 ---
-id: "q09-dantas-cap02"
-titulo: "Questão 9"
-topicos: ["03-modelos-continuos"]
+id: "dantas-cap02-q09"
+titulo: "Esperanca e Variancia para Distribuicoes das Questoes 1 a 8"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "alta"
 origem: "livro"
 solucao_verificada: false
+tags: ["esperanca", "variancia"]
+referencia: "Dantas, Cap. 2, Q. 9"
 ---
 
 ## Enunciado

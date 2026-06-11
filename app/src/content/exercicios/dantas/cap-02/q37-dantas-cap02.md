@@ -1,10 +1,12 @@
 ---
-id: "q37-dantas-cap02"
-titulo: "Questão 37"
-topicos: ["03-modelos-continuos","05-funcao-de-variavel-aleatoria"]
+id: "dantas-cap02-q37"
+titulo: "Distribuicao Geometrica por Discretizacao de Exponencial"
+topicos: ["05-funcao-de-variavel-aleatoria"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["fda", "metodo-fda"]
+referencia: "Dantas, Cap. 2, Q. 37"
 ---
 
 ## Enunciado

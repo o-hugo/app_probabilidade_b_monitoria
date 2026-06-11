@@ -1,10 +1,12 @@
 ---
-id: "q26-dantas-cap01"
-titulo: "Questão 26"
-topicos: ["01-variaveis-aleatorias-continuas"]
+id: "dantas-cap01-q26"
+titulo: "Chaves e Porta: Probabilidade na k-esima Tentativa"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["condicional"]
+referencia: "Dantas, Cap. 1, Q. 26"
 ---
 
 ## Enunciado

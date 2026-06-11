@@ -1,10 +1,12 @@
 ---
-id: "q41-dantas-cap02"
-titulo: "Questão 41"
-topicos: ["03-modelos-continuos"]
+id: "dantas-cap02-q41"
+titulo: "Estoque Otimo de Flores para Maximizar Lucro"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["esperanca"]
+referencia: "Dantas, Cap. 2, Q. 41"
 ---
 
 ## Enunciado

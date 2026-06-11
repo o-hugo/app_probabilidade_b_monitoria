@@ -1,10 +1,12 @@
 ---
-id: "q36-dantas-cap01"
-titulo: "Questão 36"
-topicos: ["01-variaveis-aleatorias-continuas"]
+id: "dantas-cap01-q36"
+titulo: "Bayes: Cor da Bola Perdida"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "alta"
 origem: "livro"
 solucao_verificada: false
+tags: ["condicional"]
+referencia: "Dantas, Cap. 1, Q. 36"
 ---
 
 ## Enunciado

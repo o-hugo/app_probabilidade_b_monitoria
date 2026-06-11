@@ -1,10 +1,12 @@
 ---
 id: "questoes-q22-livro-exemplo-261"
 titulo: "Exemplo 2.6.1"
-topicos: ["modelos-continuos"]
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["esperanca"]
+referencia: "Dantas, Ex. 2.6.1"
 ---
 
 ## Enunciado

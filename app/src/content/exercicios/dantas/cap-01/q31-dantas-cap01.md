@@ -1,10 +1,12 @@
 ---
-id: "q31-dantas-cap01"
-titulo: "Questão 31"
-topicos: ["01-variaveis-aleatorias-continuas"]
+id: "dantas-cap01-q31"
+titulo: "Probabilidades de Maos de Poker"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "alta"
 origem: "livro"
 solucao_verificada: false
+tags: ["probabilidade"]
+referencia: "Dantas, Cap. 1, Q. 31"
 ---
 
 ## Enunciado

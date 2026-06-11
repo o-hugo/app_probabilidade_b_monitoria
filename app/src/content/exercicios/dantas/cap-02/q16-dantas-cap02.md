@@ -1,10 +1,12 @@
 ---
-id: "q16-dantas-cap02"
-titulo: "Questão 16"
-topicos: ["03-modelos-continuos","05-funcao-de-variavel-aleatoria"]
-dificuldade: "media"
+id: "dantas-cap02-q16"
+titulo: "Propriedades de Distribuicoes Simetricas e Esperanca"
+topicos: ["variaveis-aleatorias-continuas"]
+dificuldade: "alta"
 origem: "livro"
 solucao_verificada: false
+tags: ["esperanca"]
+referencia: "Dantas, Cap. 2, Q. 16"
 ---
 
 ## Enunciado

@@ -1,10 +1,12 @@
 ---
-id: "q23-dantas-cap01"
-titulo: "Questão 23"
-topicos: ["01-variaveis-aleatorias-continuas"]
+id: "dantas-cap01-q23"
+titulo: "Leitores de Jornais (Inclusao-Exclusao)"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["probabilidade"]
+referencia: "Dantas, Cap. 1, Q. 23"
 ---
 
 ## Enunciado

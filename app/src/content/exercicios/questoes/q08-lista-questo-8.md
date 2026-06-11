@@ -5,6 +5,7 @@ topicos: ["modelos-continuos"]
 dificuldade: "media"
 origem: "lista"
 solucao_verificada: false
+tags: ["esperanca"]
 ---
 
 ## Enunciado

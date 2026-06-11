@@ -1,10 +1,12 @@
 ---
 id: "questoes-q32-livro-exemplo-283-fgm-bernoulli"
 titulo: "Exemplo 2.8.3 (FGM Bernoulli)"
-topicos: ["modelos-continuos"]
+topicos: ["funcao-geradora-momentos"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["fgm"]
+referencia: "Dantas, Ex. 2.8.3"
 ---
 
 ## Enunciado

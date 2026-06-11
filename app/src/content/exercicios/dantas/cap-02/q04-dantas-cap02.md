@@ -1,10 +1,12 @@
 ---
-id: "q04-dantas-cap02"
-titulo: "Questão 4"
-topicos: ["03-modelos-continuos"]
+id: "dantas-cap02-q04"
+titulo: "Distribuicao do Maximo de Dois Dados"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["probabilidade", "fda"]
+referencia: "Dantas, Cap. 2, Q. 4"
 ---
 
 ## Enunciado

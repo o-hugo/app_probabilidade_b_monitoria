@@ -1,10 +1,11 @@
 ---
 id: "questoes-q04-lista-questo-4"
 titulo: "Questão 4"
-topicos: ["modelos-continuos"]
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "lista"
 solucao_verificada: false
+tags: ["esperanca"]
 ---
 
 ## Enunciado

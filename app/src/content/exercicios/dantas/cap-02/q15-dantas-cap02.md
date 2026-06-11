@@ -1,10 +1,12 @@
 ---
-id: "q15-dantas-cap02"
-titulo: "Questão 15"
-topicos: ["03-modelos-continuos"]
-dificuldade: "media"
+id: "dantas-cap02-q15"
+titulo: "Distribuicao com Esperanca Finita mas Variancia Infinita"
+topicos: ["variaveis-aleatorias-continuas"]
+dificuldade: "alta"
 origem: "livro"
 solucao_verificada: false
+tags: ["esperanca", "variancia"]
+referencia: "Dantas, Cap. 2, Q. 15"
 ---
 
 ## Enunciado

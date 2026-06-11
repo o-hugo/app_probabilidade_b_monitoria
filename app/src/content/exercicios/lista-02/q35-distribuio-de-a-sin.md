@@ -1,10 +1,11 @@
 ---
 id: "lista02-q35-distribuio-de-a-sin"
 titulo: "Distribuição de A sin(θ)"
-topicos: ["modelos-continuos"]
+topicos: ["funcao-de-variavel-aleatoria"]
 dificuldade: "media"
 origem: "lista-02"
 solucao_verificada: false
+tags: ["metodo-fda"]
 ---
 
 ## Enunciado

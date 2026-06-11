@@ -1,10 +1,12 @@
 ---
-id: "q08-dantas-cap02"
-titulo: "Questão 8"
-topicos: ["03-modelos-continuos"]
+id: "dantas-cap02-q08"
+titulo: "FDP Cosseno: Constante e Probabilidade"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["fdp-valida", "probabilidade"]
+referencia: "Dantas, Cap. 2, Q. 8"
 ---
 
 ## Enunciado

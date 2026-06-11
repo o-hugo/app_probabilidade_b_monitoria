@@ -1,10 +1,12 @@
 ---
-id: "q17-dantas-cap02"
-titulo: "Questão 17"
-topicos: ["03-modelos-continuos","02-funcao-geradora-momentos"]
+id: "dantas-cap02-q17"
+titulo: "FGM de Distribuicoes Continuas das Questoes 5 a 8"
+topicos: ["02-funcao-geradora-momentos"]
 dificuldade: "alta"
 origem: "livro"
 solucao_verificada: false
+tags: ["fgm", "esperanca", "variancia"]
+referencia: "Dantas, Cap. 2, Q. 17"
 ---
 
 ## Enunciado

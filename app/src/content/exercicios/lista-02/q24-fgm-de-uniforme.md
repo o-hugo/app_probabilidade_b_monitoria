@@ -1,10 +1,11 @@
 ---
 id: "lista02-q24-fgm-de-uniforme"
 titulo: "FGM de Uniforme"
-topicos: ["modelos-continuos"]
+topicos: ["funcao-geradora-momentos", "modelos-continuos"]
 dificuldade: "media"
 origem: "lista-02"
 solucao_verificada: false
+tags: ["fgm"]
 ---
 
 ## Enunciado

@@ -1,10 +1,12 @@
 ---
-id: "q30-dantas-cap02"
-titulo: "Questão 30"
-topicos: ["03-modelos-continuos","05-funcao-de-variavel-aleatoria"]
+id: "dantas-cap02-q30"
+titulo: "Distribuicao Mista: Esperanca e Variancia"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "alta"
 origem: "livro"
 solucao_verificada: false
+tags: ["esperanca", "variancia"]
+referencia: "Dantas, Cap. 2, Q. 30"
 ---
 
 ## Enunciado

@@ -1,10 +1,12 @@
 ---
-id: "q06-dantas-cap01"
-titulo: "Questão 6"
-topicos: ["01-variaveis-aleatorias-continuas"]
+id: "dantas-cap01-q06"
+titulo: "Identidades do Coeficiente Binomial"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["probabilidade"]
+referencia: "Dantas, Cap. 1, Q. 6"
 ---
 
 ## Enunciado

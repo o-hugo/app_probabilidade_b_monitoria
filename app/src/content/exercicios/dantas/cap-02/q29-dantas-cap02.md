@@ -1,10 +1,12 @@
 ---
-id: "q29-dantas-cap02"
-titulo: "Questão 29"
-topicos: ["03-modelos-continuos"]
+id: "dantas-cap02-q29"
+titulo: "Roleta: Estrategia de Aposta e Esperanca"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["esperanca", "probabilidade"]
+referencia: "Dantas, Cap. 2, Q. 29"
 ---
 
 ## Enunciado

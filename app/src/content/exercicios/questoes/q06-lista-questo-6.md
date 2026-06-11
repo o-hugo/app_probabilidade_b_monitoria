@@ -1,10 +1,11 @@
 ---
 id: "questoes-q06-lista-questo-6"
 titulo: "Questão 6"
-topicos: ["modelos-continuos"]
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "lista"
 solucao_verificada: false
+tags: ["fdp-valida", "esperanca", "variancia"]
 ---
 
 ## Enunciado

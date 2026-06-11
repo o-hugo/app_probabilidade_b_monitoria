@@ -1,10 +1,12 @@
 ---
-id: "q43-dantas-cap01"
-titulo: "Questão 43"
-topicos: ["01-variaveis-aleatorias-continuas"]
+id: "dantas-cap01-q43"
+titulo: "Distribuicao Binomial em Urna Especifica"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["probabilidade"]
+referencia: "Dantas, Cap. 1, Q. 43"
 ---
 
 ## Enunciado

@@ -3,12 +3,41 @@ import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 
 const exercicios = await getCollection('exercicios');
+const topicos    = await getCollection('topicos');
+
+const topicoNomes = Object.fromEntries(
+  topicos.map(t => [t.id.replace(/^\d+-/, ''), t.data.titulo])
+);
+
+const tagLabels: Record<string, string> = {
+  'fdp-valida':       'FDP valida',
+  'probabilidade':    'Probabilidade P(a≤X≤b)',
+  'fda':              'FDA F(x)',
+  'esperanca':        'Esperanca E[X]',
+  'variancia':        'Variancia Var[X]',
+  'mediana':          'Mediana',
+  'moda':             'Moda',
+  'condicional':      'Probabilidade condicional',
+  'padronizacao-z':   'Padronizacao Z (Normal)',
+  'tlc':              'TLC / Aprox. Normal',
+  'falta-de-memoria': 'Falta de memoria (Exp.)',
+  'taxa-de-falha':    'Taxa de falha h(t)',
+  'confiabilidade':   'Confiabilidade R(t)',
+  'fgm':              'FGM Mₓ(t)',
+  'metodo-fda':       'Transformacao: metodo FDA',
+  'metodo-jacobiano': 'Transformacao: jacobiano',
+};
 ---
 
 <Layout title="Exercícios">
 	<div class="page-header">
 		<h1>Prática de Exercícios</h1>
-		<p>Filtre e resolva exercícios com revelação progressiva.</p>
+		<p>Filtre por tópico, habilidade ou dificuldade e resolva com revelação progressiva.</p>
+	</div>
+
+	<div id="topic-filter-banner" class="topic-banner" style="display:none">
+		<span>Tópico: <strong id="banner-text"></strong></span>
+		<a href={`${import.meta.env.BASE_URL}exercicios`} class="btn btn-secondary btn-sm">Mostrar todos</a>
 	</div>
 
 	<div class="filters-container">
@@ -22,106 +51,162 @@ const exercicios = await getCollection('exercicios');
 			</select>
 		</div>
 		<div class="filter-group">
-			<label for="filter-origin">Origem:</label>
-			<select id="filter-origin" class="filter-select">
+			<label for="filter-tags">Habilidade:</label>
+			<select id="filter-tags" class="filter-select">
 				<option value="all">Todas</option>
-				<option value="lista-02">Lista 02</option>
-				<option value="prova-3">Prova 3</option>
-				<option value="slides">Slides</option>
-				<option value="livro">Livro</option>
-				<option value="aula">Aula</option>
+				<optgroup label="Conceitos gerais">
+					<option value="fdp-valida">FDP valida</option>
+					<option value="probabilidade">Probabilidade P(a&le;X&le;b)</option>
+					<option value="fda">FDA F(x)</option>
+					<option value="esperanca">Esperanca E[X]</option>
+					<option value="variancia">Variancia Var[X]</option>
+					<option value="mediana">Mediana</option>
+					<option value="moda">Moda</option>
+					<option value="condicional">Prob. condicional</option>
+				</optgroup>
+				<optgroup label="Distribuicoes nomeadas">
+					<option value="padronizacao-z">Padronizacao Z (Normal)</option>
+					<option value="tlc">TLC / Aprox. Normal</option>
+					<option value="falta-de-memoria">Falta de memoria (Exp.)</option>
+					<option value="taxa-de-falha">Taxa de falha h(t)</option>
+					<option value="confiabilidade">Confiabilidade R(t)</option>
+				</optgroup>
+				<optgroup label="Tecnicas">
+					<option value="fgm">FGM M_X(t)</option>
+					<option value="metodo-fda">Transformacao: metodo FDA</option>
+					<option value="metodo-jacobiano">Transformacao: jacobiano</option>
+				</optgroup>
 			</select>
 		</div>
 		<div class="filter-group">
 			<label for="filter-status">Status:</label>
 			<select id="filter-status" class="filter-select">
 				<option value="all">Todos</option>
-				<option value="unverified">Não Verificados (⚠️)</option>
-				<option value="verified">Verificados (✅)</option>
+				<option value="unverified">Não Verificados</option>
+				<option value="verified">Verificados</option>
 			</select>
 		</div>
 	</div>
 
 	<div class="exercises-grid" id="exercises-grid">
 		{exercicios.map((ex) => (
-			<a href={`${import.meta.env.BASE_URL}exercicios/${ex.id}`} 
+			<a href={`${import.meta.env.BASE_URL}exercicios/${ex.id}`}
 			   class="exercise-card"
 			   data-diff={ex.data.dificuldade}
-			   data-origin={ex.data.origem}
 			   data-verified={ex.data.solucao_verificada ? "true" : "false"}
-			   data-topicos={JSON.stringify(ex.data.topicos)}>
+			   data-topicos={ex.data.topicos.join(',')}
+			   data-tags={ex.data.tags.join(',')}>
 				<div class="ex-header">
 					<h3>{ex.data.titulo}</h3>
 					{!ex.data.solucao_verificada && <span class="warning-icon" title="Não verificada">⚠️</span>}
 				</div>
 				<div class="ex-tags">
 					<span class={`badge diff-${ex.data.dificuldade}`}>{ex.data.dificuldade}</span>
-					<span class="badge origin">{ex.data.origem}</span>
+					{ex.data.tags.slice(0, 2).map(tag => (
+						<span class="badge tag-skill">{tag.replace(/-/g, ' ')}</span>
+					))}
+					{ex.data.referencia && (
+						<span class="badge ref-badge">{ex.data.referencia}</span>
+					)}
 				</div>
 			</a>
 		))}
 	</div>
+
+	<p id="empty-state" class="empty-state" style="display:none">
+		Nenhum exercício encontrado com esses filtros.
+	</p>
 </Layout>
 
-<script>
+<script define:vars={{ topicoNomes }}>
 	document.addEventListener('DOMContentLoaded', () => {
-		const diffFilter = document.getElementById('filter-diff') as HTMLSelectElement;
-		const originFilter = document.getElementById('filter-origin') as HTMLSelectElement;
-		const statusFilter = document.getElementById('filter-status') as HTMLSelectElement;
-		const cards = document.querySelectorAll('.exercise-card');
+		const diffFilter   = document.getElementById('filter-diff');
+		const tagsFilter   = document.getElementById('filter-tags');
+		const statusFilter = document.getElementById('filter-status');
+		const cards        = document.querySelectorAll('.exercise-card');
+		const emptyState   = document.getElementById('empty-state');
 
-		const urlParams = new URLSearchParams(window.location.search);
+		const urlParams   = new URLSearchParams(window.location.search);
 		const topicoParam = urlParams.get('topico');
+		const topicoSlug  = topicoParam ? topicoParam.replace(/^\d+-/, '') : null;
+
+		if (topicoSlug) {
+			const banner     = document.getElementById('topic-filter-banner');
+			const bannerText = document.getElementById('banner-text');
+			if (banner && bannerText) {
+				banner.style.display = 'flex';
+				bannerText.textContent = topicoNomes[topicoSlug] || topicoSlug.replace(/-/g, ' ');
+			}
+		}
 
 		function filterCards() {
-			const diff = diffFilter.value;
-			const origin = originFilter.value;
-			const status = statusFilter.value;
+			const diff     = diffFilter.value;
+			const tag      = tagsFilter.value;
+			const status   = statusFilter.value;
+			let visible    = 0;
 
-			cards.forEach((card: any) => {
-				const cDiff = card.dataset.diff;
-				const cOrigin = card.dataset.origin;
+			cards.forEach((card) => {
+				const cDiff     = card.dataset.diff;
 				const cVerified = card.dataset.verified;
-				const cTopicos = card.dataset.topicos || "[]";
-				
-				let topicosArray = [];
-				try { topicosArray = JSON.parse(cTopicos); } catch(e) {}
+				// normaliza prefixos numericos para comparacao uniforme (ex: "02-fgm" -> "fgm")
+				const cTopicos  = (card.dataset.topicos || '').split(',').map(t => t.replace(/^\d+-/, ''));
+				const cTags     = (card.dataset.tags    || '').split(',');
 
 				let show = true;
 				if (diff !== 'all' && cDiff !== diff) show = false;
-				if (origin !== 'all' && cOrigin !== origin) show = false;
 				if (status === 'unverified' && cVerified === 'true') show = false;
-				if (status === 'verified' && cVerified === 'false') show = false;
-				if (topicoParam && !topicosArray.includes(topicoParam)) show = false;
+				if (status === 'verified'   && cVerified === 'false') show = false;
+				if (topicoSlug && !cTopicos.includes(topicoSlug)) show = false;
+				if (tag  !== 'all' && !cTags.includes(tag)) show = false;
 
 				card.style.display = show ? 'flex' : 'none';
+				if (show) visible++;
 			});
+
+			if (emptyState) emptyState.style.display = visible === 0 ? 'block' : 'none';
 		}
 
 		diffFilter.addEventListener('change', filterCards);
-		originFilter.addEventListener('change', filterCards);
+		tagsFilter.addEventListener('change', filterCards);
 		statusFilter.addEventListener('change', filterCards);
-		
-		// Inicializa o filtro imediatamente caso haja parâmetros
-		if(topicoParam) {
-			filterCards();
-		}
+
+		filterCards();
 	});
 </script>
 
 <style>
 	.page-header {
-		margin-bottom: var(--space-8);
+		margin-bottom: var(--space-6);
 	}
 
 	.page-header h1 {
-		font-size: 2.5rem;
+		font-size: clamp(1.75rem, 5vw, 2.5rem);
 		margin-bottom: var(--space-2);
 	}
 
 	.page-header p {
-		font-size: 1.25rem;
+		font-size: clamp(1rem, 3vw, 1.25rem);
 		color: var(--color-text-muted);
+	}
+
+	.topic-banner {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--space-4);
+		background-color: #dbeafe;
+		color: #1e40af;
+		border: 1px solid #93c5fd;
+		padding: var(--space-3) var(--space-4);
+		border-radius: var(--radius-md);
+		margin-bottom: var(--space-4);
+		font-size: 0.95rem;
+	}
+
+	.btn-sm {
+		font-size: 0.85rem;
+		padding: var(--space-1) var(--space-3);
+		white-space: nowrap;
 	}
 
 	.filters-container {
@@ -150,7 +235,7 @@ const exercicios = await getCollection('exercicios');
 
 	.exercises-grid {
 		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+		grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
 		gap: var(--space-4);
 	}
 
@@ -194,6 +279,7 @@ const exercicios = await getCollection('exercicios');
 	.ex-tags {
 		display: flex;
 		gap: var(--space-2);
+		flex-wrap: wrap;
 	}
 
 	.badge {
@@ -205,6 +291,24 @@ const exercicios = await getCollection('exercicios');
 
 	.diff-baixa { background-color: #dcfce7; color: #166534; }
 	.diff-media { background-color: #fef08a; color: #854d0e; }
-	.diff-alta { background-color: #fee2e2; color: #991b1b; }
-	.origin { background-color: var(--color-bg); color: var(--color-text-muted); border: 1px solid var(--color-border); }
+	.diff-alta  { background-color: #fee2e2; color: #991b1b; }
+
+	.tag-skill {
+		background-color: #ede9fe;
+		color: #5b21b6;
+	}
+
+	.ref-badge {
+		background-color: var(--color-bg);
+		color: var(--color-text-muted);
+		border: 1px solid var(--color-border);
+		font-style: italic;
+	}
+
+	.empty-state {
+		text-align: center;
+		color: var(--color-text-muted);
+		padding: var(--space-12);
+		font-size: 1.1rem;
+	}
 </style>

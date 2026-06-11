@@ -1,10 +1,12 @@
 ---
-id: "q32-dantas-cap01"
-titulo: "Questão 32"
-topicos: ["01-variaveis-aleatorias-continuas"]
+id: "dantas-cap01-q32"
+titulo: "Primeira Cara em Lancamento Par ou Impar"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["probabilidade"]
+referencia: "Dantas, Cap. 1, Q. 32"
 ---
 
 ## Enunciado

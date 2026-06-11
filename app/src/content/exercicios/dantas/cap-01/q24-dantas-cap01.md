@@ -1,10 +1,12 @@
 ---
-id: "q24-dantas-cap01"
-titulo: "Questão 24"
-topicos: ["01-variaveis-aleatorias-continuas"]
+id: "dantas-cap01-q24"
+titulo: "Probabilidade Condicional em Tabela de Contingencia"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["condicional"]
+referencia: "Dantas, Cap. 1, Q. 24"
 ---
 
 ## Enunciado

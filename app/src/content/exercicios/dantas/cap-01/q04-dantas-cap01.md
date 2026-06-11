@@ -1,10 +1,12 @@
 ---
-id: "q04-dantas-cap01"
-titulo: "Questão 4"
-topicos: ["01-variaveis-aleatorias-continuas"]
+id: "dantas-cap01-q04"
+titulo: "Identificacao de Relacoes Verdadeiras entre Eventos"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["probabilidade"]
+referencia: "Dantas, Cap. 1, Q. 4"
 ---
 
 ## Enunciado

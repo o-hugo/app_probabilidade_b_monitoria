@@ -1,10 +1,12 @@
 ---
-id: "q32-dantas-cap02"
-titulo: "Questão 32"
-topicos: ["03-modelos-continuos"]
+id: "dantas-cap02-q32"
+titulo: "FDA do Quadrado da Distancia em Disco"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["fda"]
+referencia: "Dantas, Cap. 2, Q. 32"
 ---
 
 ## Enunciado

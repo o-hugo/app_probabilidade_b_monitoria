@@ -1,14 +1,13 @@
 ---
-id: "q03-dantas-cap01"
-titulo: "Questão 3"
-topicos: ["01-variaveis-aleatorias-continuas"]
+id: "dantas-cap01-q03"
+titulo: "Operacoes em Espaco Amostral Continuo [0,1]"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["probabilidade"]
+referencia: "Dantas, Cap. 1, Q. 3"
 ---
-
-> [!NOTE]
-> A numeração desta questão (3) foi inferida pela sua sequência no livro original.
 
 ## Enunciado
 Suponha que o espaço amostral é o intervalo [0,1] dos reais.

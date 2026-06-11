@@ -1,10 +1,12 @@
 ---
-id: "q29-dantas-cap01"
-titulo: "Questão 29"
-topicos: ["01-variaveis-aleatorias-continuas"]
-dificuldade: "media"
+id: "dantas-cap01-q29"
+titulo: "Arranjo de Livros com Restricao de Assunto"
+topicos: ["variaveis-aleatorias-continuas"]
+dificuldade: "baixa"
 origem: "livro"
 solucao_verificada: false
+tags: ["probabilidade"]
+referencia: "Dantas, Cap. 1, Q. 29"
 ---
 
 ## Enunciado

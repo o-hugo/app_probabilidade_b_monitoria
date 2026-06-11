@@ -1,10 +1,11 @@
 ---
 id: "questoes-q14-slide-questo-14"
 titulo: "Questão 14"
-topicos: ["modelos-continuos"]
+topicos: ["funcao-de-variavel-aleatoria"]
 dificuldade: "media"
 origem: "slide"
 solucao_verificada: false
+tags: ["metodo-fda"]
 ---
 
 ## Enunciado

@@ -1,10 +1,12 @@
 ---
-id: "q11-dantas-cap01"
-titulo: "Questão 11"
-topicos: ["01-variaveis-aleatorias-continuas"]
+id: "dantas-cap01-q11"
+titulo: "Limites de P(A cap B) com Probabilidades Fixadas"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["probabilidade"]
+referencia: "Dantas, Cap. 1, Q. 11"
 ---
 
 ## Enunciado

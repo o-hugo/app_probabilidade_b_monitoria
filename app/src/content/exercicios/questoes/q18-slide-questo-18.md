@@ -1,10 +1,11 @@
 ---
 id: "questoes-q18-slide-questo-18"
 titulo: "Questão 18"
-topicos: ["modelos-continuos"]
+topicos: ["funcao-de-variavel-aleatoria"]
 dificuldade: "media"
 origem: "slide"
 solucao_verificada: false
+tags: ["metodo-fda"]
 ---
 
 ## Enunciado

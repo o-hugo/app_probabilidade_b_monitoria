@@ -1,10 +1,11 @@
 ---
 id: "lista02-q41-definio-de-fdp"
 titulo: "Definição de FDP"
-topicos: ["modelos-continuos"]
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "lista-02"
 solucao_verificada: false
+tags: ["fdp-valida"]
 ---
 
 ## Enunciado

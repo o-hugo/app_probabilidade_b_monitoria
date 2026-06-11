@@ -1,10 +1,12 @@
 ---
 id: "questoes-q24-livro-exemplo-284-fgm-exponencial"
 titulo: "Exemplo 2.8.4 (FGM Exponencial)"
-topicos: ["modelos-continuos"]
+topicos: ["modelos-continuos", "funcao-geradora-momentos"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["fgm"]
+referencia: "Dantas, Ex. 2.8.4"
 ---
 
 ## Enunciado

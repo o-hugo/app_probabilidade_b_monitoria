@@ -1,10 +1,12 @@
 ---
 id: "questoes-q27-livro-exemplo-251-loteria"
 titulo: "Exemplo 2.5.1 (Loteria)"
-topicos: ["modelos-continuos"]
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["esperanca"]
+referencia: "Dantas, Ex. 2.5.1"
 ---
 
 ## Enunciado

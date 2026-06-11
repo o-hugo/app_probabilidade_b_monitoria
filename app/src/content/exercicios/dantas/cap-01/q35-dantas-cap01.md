@@ -1,10 +1,12 @@
 ---
-id: "q35-dantas-cap01"
-titulo: "Questão 35"
-topicos: ["01-variaveis-aleatorias-continuas"]
+id: "dantas-cap01-q35"
+titulo: "Probabilidade de Entrada com Porta Possivelmente Trancada"
+topicos: ["variaveis-aleatorias-continuas"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["condicional"]
+referencia: "Dantas, Cap. 1, Q. 35"
 ---
 
 ## Enunciado

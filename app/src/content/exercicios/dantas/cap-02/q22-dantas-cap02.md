@@ -1,10 +1,12 @@
 ---
-id: "q22-dantas-cap02"
-titulo: "Questão 22"
-topicos: ["03-modelos-continuos","02-funcao-geradora-momentos"]
+id: "dantas-cap02-q22"
+titulo: "Funcao Geradora de Cumulantes e Derivadas em t=0"
+topicos: ["02-funcao-geradora-momentos"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
+tags: ["fgm", "esperanca", "variancia"]
+referencia: "Dantas, Cap. 2, Q. 22"
 ---
 
 ## Enunciado
