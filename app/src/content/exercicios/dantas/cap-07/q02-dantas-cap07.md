@@ -1,0 +1,26 @@
+---
+id: "dantas-cap07-q02"
+titulo: "Desigualdade de Tchebyschev — Poisson(λ=1)"
+topicos: ["07-desigualdades-concentracao"]
+dificuldade: "baixa"
+origem: "livro"
+solucao_verificada: false
+tags: ["probabilidade"]
+referencia: "Dantas, Cap. 7, Q. 2"
+---
+
+## Enunciado
+
+$X\sim\text{Poisson}(\lambda=1)$. Use Tchebyschev para verificar:
+
+(a) $P(X\le\lambda/2)\le\dfrac{4}{\lambda}$. (b) $P(X\ge 2\lambda)\le\dfrac{1}{\lambda}$.
+
+## Solução
+
+Para $X\sim\text{Poisson}(\lambda)$: $E(X)=\lambda$, $\text{Var}(X)=\lambda$.
+
+**Tchebyschev:** $P(|X-\mu|\ge k)\le\dfrac{\sigma^2}{k^2}$.
+
+**(a)** $P(X\le\lambda/2)=P(X-\lambda\le -\lambda/2)\le P(|X-\lambda|\ge\lambda/2)\le\dfrac{\lambda}{(\lambda/2)^2}=\dfrac{4}{\lambda}$. $\checkmark$
+
+**(b)** $P(X\ge 2\lambda)=P(X-\lambda\ge\lambda)\le P(|X-\lambda|\ge\lambda)\le\dfrac{\lambda}{\lambda^2}=\dfrac{1}{\lambda}$. $\checkmark$
