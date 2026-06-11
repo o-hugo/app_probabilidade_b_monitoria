@@ -1,0 +1,22 @@
+---
+id: "dantas-cap07-q06"
+titulo: "Desigualdade de Tchebyschev — Forma Clássica"
+topicos: ["07-desigualdades-concentracao"]
+dificuldade: "baixa"
+origem: "livro"
+solucao_verificada: false
+tags: ["probabilidade"]
+referencia: "Dantas, Cap. 7, Q. 6"
+---
+
+## Enunciado
+
+Se $X$ tem média $\mu$ e variância $\sigma^2$, mostre que $P(|X-\mu|\ge k\sigma)\le\dfrac{1}{k^2}$, $k\in\mathbb{N}$.
+
+## Solução
+
+Pela desigualdade de Markov aplicada a $(X-\mu)^2$:
+
+$$P(|X-\mu|\ge k\sigma)=P\!\left((X-\mu)^2\ge k^2\sigma^2\right)\le\frac{E[(X-\mu)^2]}{k^2\sigma^2}=\frac{\sigma^2}{k^2\sigma^2}=\frac{1}{k^2}. \quad\blacksquare$$
+
+**Interpretação:** Pelo menos $1-1/k^2$ da probabilidade concentra-se no intervalo $(\mu-k\sigma,\mu+k\sigma)$. Por exemplo, com $k=2$: ao menos 75%; com $k=3$: ao menos 88,9%.
