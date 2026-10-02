@@ -28,7 +28,11 @@ Reconhecemos $f_Y(y) = \frac{1}{\Gamma(1/2)2^{1/2}}y^{1/2-1}e^{-y/2}$, que é a 
 
 ## Passo 2: Momentos
 
-Como $E(X^{2k}) = (2k-1)!!$ para $X \sim N(0,1)$:
+A FGM de $X \sim N(0,1)$ é $M_X(t) = e^{t^2/2}$ (caso $\mu = 0$, $\sigma^2 = 1$ de $e^{\mu t + \sigma^2 t^2/2}$, obtida completando o quadrado no expoente). Expandindo em série:
+
+$$M_X(t) = \sum_{k=0}^{\infty}\frac{(t^2/2)^k}{k!} = 1 + \frac{t^2}{2} + \frac{t^4}{8} + \cdots$$
+
+Como $E(X^n)$ é $n!$ vezes o coeficiente de $t^n$: $E(X^2) = 2!\cdot\frac{1}{2} = 1$ e $E(X^4) = 4!\cdot\frac{1}{8} = 3$. Em geral, $E(X^{2k}) = \frac{(2k)!}{2^k k!} = (2k-1)!!$.
 
 $$E(Y) = E(X^2) = 1 = \text{Var}(X).$$
 

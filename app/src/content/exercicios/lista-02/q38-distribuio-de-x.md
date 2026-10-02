@@ -20,4 +20,4 @@ $F_Y(y) = P(Y \le y) = P(X^2 \le y) = P(-\sqrt{y} \le X \le \sqrt{y}) = \Phi(\sq
 
 ## b) Média e Variância
 
-$E[Y] = E[X^2] = Var(X) + (E[X])^2 = 1 + 0^2 = 1$.<br>$Var(Y) = Var(X^2) = E[X^4] - (E[X^2])^2$. O 4º momento de uma $N(0,1)$ é 3. $Var(Y) = 3 - 1^2 = 2$.
+$E[Y] = E[X^2] = Var(X) + (E[X])^2 = 1 + 0^2 = 1$.<br>$Var(Y) = Var(X^2) = E[X^4] - (E[X^2])^2$. O 4º momento de uma $N(0,1)$ é 3: a FGM é $M_X(t) = e^{t^2/2} = 1 + \frac{t^2}{2} + \frac{t^4}{8} + \cdots$, e $E[X^4]$ é $4!$ vezes o coeficiente de $t^4$, ou seja, $E[X^4] = 24 \cdot \frac{1}{8} = 3$.<br>$Var(Y) = 3 - 1^2 = 2$.

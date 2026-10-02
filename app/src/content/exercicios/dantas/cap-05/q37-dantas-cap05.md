@@ -5,7 +5,7 @@ topicos: ["05-funcao-de-variavel-aleatoria"]
 dificuldade: "media"
 origem: "livro"
 solucao_verificada: false
-tags: ["fdp-valida", "esperanca", "variancia", "metodo-fda"]
+tags: ["fdp-valida", "esperanca", "variancia", "metodo-fda", "fgm"]
 referencia: "Dantas, Cap. 5, Q. 37"
 ---
 
@@ -23,15 +23,29 @@ $$f_X(x) = \frac{1}{x\sigma\sqrt{2\pi}}\exp\!\left\{-\frac{(\log x - \mu)^2}{2\s
 
 **Resumo:** Densidade lognormal via mudança de variável $y = \log x$.
 
-## Passo 2: Item (b) — $E(X)$
+## Passo 2: FGM de $Y \sim N(\mu, \sigma^2)$
 
-$$E(X) = E(e^Y) = \phi_Y(1)$$
+$$\phi_Y(t) = E(e^{tY}) = \frac{1}{\sigma\sqrt{2\pi}}\int_{-\infty}^{\infty}\exp\!\left\{ty - \frac{(y-\mu)^2}{2\sigma^2}\right\}dy.$$
 
-onde $\phi_Y(t) = e^{\mu t + \sigma^2 t^2/2}$ é a FGM de $Y \sim N(\mu,\sigma^2)$. Logo:
+Completando o quadrado no expoente:
 
-$$E(X) = e^{\mu + \sigma^2/2}.$$
+$$ty - \frac{(y-\mu)^2}{2\sigma^2} = -\frac{1}{2\sigma^2}\left[(y-\mu-\sigma^2 t)^2 - (\mu+\sigma^2 t)^2 + \mu^2\right] = -\frac{(y-\mu-\sigma^2 t)^2}{2\sigma^2} + \mu t + \frac{\sigma^2 t^2}{2}.$$
 
-## Passo 3: $\text{Var}(X)$
+Logo:
+
+$$\phi_Y(t) = e^{\mu t + \sigma^2 t^2/2}\cdot\underbrace{\frac{1}{\sigma\sqrt{2\pi}}\int_{-\infty}^{\infty}\exp\!\left\{-\frac{(y-\mu-\sigma^2 t)^2}{2\sigma^2}\right\}dy}_{=\,1} = e^{\mu t + \sigma^2 t^2/2},$$
+
+pois, com $z = (y-\mu-\sigma^2 t)/\sigma$, a integral vale $\sigma\int_{-\infty}^{\infty}e^{-z^2/2}\,dz = \sigma\sqrt{2\pi}$.
+
+**Resumo:** $\phi_Y(t) = e^{\mu t + \sigma^2 t^2/2}$, obtida completando o quadrado.
+
+## Passo 3: Item (b) — $E(X)$
+
+$$E(X) = E(e^Y) = \phi_Y(1) = e^{\mu + \sigma^2/2}.$$
+
+**Resumo:** $E(X)$ é a FGM de $Y$ avaliada em $t = 1$.
+
+## Passo 4: $\text{Var}(X)$
 
 $$E(X^2) = E(e^{2Y}) = \phi_Y(2) = e^{2\mu + 2\sigma^2}.$$
 

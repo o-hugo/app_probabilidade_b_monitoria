@@ -22,6 +22,12 @@ $X_1,X_2,\ldots$ i.i.d. $N(0,\sigma^2)$.
 
 $$E(X_1^2)=\sigma^2, \qquad E(X_1^4)=3\sigma^4.$$
 
+Os dois momentos saem da FGM de $N(0,\sigma^2)$, $M(t)=e^{\sigma^2t^2/2}$ (obtida completando o quadrado no expoente). Expandindo em série:
+
+$$M(t)=\sum_{k=0}^{\infty}\frac{1}{k!}\left(\frac{\sigma^2t^2}{2}\right)^k=1+\frac{\sigma^2}{2}t^2+\frac{\sigma^4}{8}t^4+\cdots$$
+
+Como $E(X^n)$ é $n!$ vezes o coeficiente de $t^n$: $E(X_1^2)=2!\cdot\frac{\sigma^2}{2}=\sigma^2$ e $E(X_1^4)=4!\cdot\frac{\sigma^4}{8}=3\sigma^4$.
+
 $$\text{Var}(X_1^2)=E(X_1^4)-[E(X_1^2)]^2=3\sigma^4-\sigma^4=2\sigma^4.$$
 
 **(b)** Seja $S_n=\sum_{i=1}^n X_i^2$. Pelo TLC:
